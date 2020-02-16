@@ -26,10 +26,17 @@ h3,
 h4,
 h5,
 h6,
-button {
+button,
+.heading {
     font-family: 'Montserrat';
     font-weight: 900;
     text-transform: uppercase;
+    color: $primary,
+}
+
+button,
+.heading {
+    color: #ffffff;
 }
 
 input,
@@ -69,5 +76,14 @@ textarea {
     th,
     td {
         border: none;
+    }
+}
+
+.list-group-item {
+    background-color: $background;
+    border: none;
+
+    &:nth-child(odd) {
+        background-color: $background-darker;
     }
 }

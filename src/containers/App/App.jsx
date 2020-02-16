@@ -1,6 +1,6 @@
 import React from "react";
-import { hot } from "react-hot-loader";
 import './App.scss';
+import SelectTournament from "../../components/SelectTournament/SelectTournament";
 
 class App extends React.Component {
     render() {
@@ -12,9 +12,11 @@ class App extends React.Component {
                         <h1 className="text-primary">Cup Fighters</h1>
                     </div>
                 </div>
+
+                <SelectTournament />
             </div>
         );
     }
 }
 
-export default hot(module)(App);
+export default App;

@@ -10,7 +10,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "^.+\\.(css|scss)$": "./src/__mocks__/styleMock.js"
+      "^.+\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     }
   },
   "author": "Thomas Kamermans",
@@ -41,6 +41,8 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-hot-loader": "^4.3.11",
-    "react-redux": "^7.1.3"
+    "react-redux": "^7.1.3",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0"
   }
 }
