@@ -1,5 +1,5 @@
-import { startNewTournament } from "./actions";
-import { START_NEW_TOURNAMENT } from "./actionTypes";
+import { startNewTournament, setActiveTournament } from "./actions";
+import { START_NEW_TOURNAMENT, SET_ACTIVE_TOURNAMENT } from "./actionTypes";
 
 describe('actions', () => {
     it('creates a new tournament action', () => {
@@ -11,5 +11,16 @@ describe('actions', () => {
             },
         };
         expect(startNewTournament(title)).toEqual(expectedAction);
+    });
+
+    it('creates a set active tournament action', () => {
+        const tournamentId = 'tournament#123';
+        const expectedAction = {
+            type: SET_ACTIVE_TOURNAMENT,
+            payload: {
+                tournamentId,
+            },
+        };
+        expect(setActiveTournament(tournamentId)).toEqual(expectedAction);
     });
 });

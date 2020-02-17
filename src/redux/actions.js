@@ -1,8 +1,15 @@
-import { START_NEW_TOURNAMENT } from "./actionTypes";
+import { START_NEW_TOURNAMENT, SET_ACTIVE_TOURNAMENT } from "./actionTypes";
 
 export const startNewTournament = title => ({
     type: START_NEW_TOURNAMENT,
     payload: {
-        title
+        title,
+    },
+});
+
+export const setActiveTournament = tournamentId => ({
+    type: SET_ACTIVE_TOURNAMENT,
+    payload: {
+        tournamentId,
     },
 });

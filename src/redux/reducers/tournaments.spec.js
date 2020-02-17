@@ -1,5 +1,5 @@
 import tournaments from "./tournaments";
-import { START_NEW_TOURNAMENT } from "../actionTypes";
+import { START_NEW_TOURNAMENT, SET_ACTIVE_TOURNAMENT } from "../actionTypes";
 
 describe('tournaments', () => {
     it('adds a new started tournament to the store', () => {
@@ -8,7 +8,9 @@ describe('tournaments', () => {
             type: START_NEW_TOURNAMENT,
             payload,
         });
-        expect(store[Object.keys(store)[0]]).toEqual(payload);
+        const newTournamentId = Object.keys(store.list)[0];
+        expect(store.activeTournamentId).toEqual(newTournamentId);
+        expect(store.list[newTournamentId]).toEqual(payload);
     });
 
     it('keeps my old tournaments in the store', () => {
@@ -16,14 +18,25 @@ describe('tournaments', () => {
         const oldTournamentKey = 'tournament#00000000';
         const payload = { title: 'My new tournament' };
         const store = tournaments(
-            { [oldTournamentKey]: oldTournament },
+            { list: { [oldTournamentKey]: oldTournament } },
             {
                 type: START_NEW_TOURNAMENT,
                 payload,
             }
         );
-        expect(store[oldTournamentKey]).toEqual(oldTournament);
-        expect(store[Object.keys(store)[1]]).toEqual(payload);
+        const newTournamentId = Object.keys(store.list)[1];
+        expect(store.list[oldTournamentKey]).toEqual(oldTournament);
+        expect(store.activeTournamentId).toEqual(newTournamentId)
+        expect(store.list[newTournamentId]).toEqual(payload);
+    });
+
+    it('sets a tournament as active', () => {
+        const tournamentId = 'tournament#123';
+        const store = tournaments({}, {
+            type: SET_ACTIVE_TOURNAMENT,
+            payload: { tournamentId },
+        })
+        expect(store.activeTournamentId).toEqual(tournamentId);
     });
 
     it('does nothing for unknown actions', () => {

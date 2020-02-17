@@ -1,4 +1,4 @@
-import { getTournamentList } from "./selectors";
+import { getTournamentList, getActiveTournament } from "./selectors";
 
 describe('selectors', () => {
     it('returns a list of tournaments', () => {
@@ -9,8 +9,10 @@ describe('selectors', () => {
 
         expect(getTournamentList({
             tournaments: {
-                [tournamentKey1]: { title: tournamentTitle1 },
-                [tournamentKey2]: { title: tournamentTitle2 },
+                list: {
+                    [tournamentKey1]: { title: tournamentTitle1 },
+                    [tournamentKey2]: { title: tournamentTitle2 },
+                },
             }
         })).toEqual([
             { tournamentId: tournamentKey1, title: tournamentTitle1 },
@@ -21,4 +23,28 @@ describe('selectors', () => {
     it('returns an empty array if there are no tournaments', () => {
         expect(getTournamentList({})).toEqual([]);
     });
+
+    it('returns the active tournament', () => {
+        const activeTournamentId = 'tournament#789';
+        const tournament = { title: 'My active tournament' };
+        expect(getActiveTournament({
+            tournaments: {
+                activeTournamentId,
+                list: { [activeTournamentId]: tournament },
+            },
+        })).toEqual(tournament);
+    });
+
+    it('returns null if the active tournament does not exist', () => {
+        expect(getActiveTournament({
+            activeTournamentId: 'tournament#123',
+            tournaments: { ['tournament#456']: { title: 'Not the active tournament' } },
+        })).toEqual(null);
+    });
+
+    it('returns null if no active tournament is set', () => {
+        expect(getActiveTournament({
+            tournaments: { ['tournament#456']: { title: 'Not the active tournament' } },
+        })).toEqual(null);
+    })
 });

@@ -1,8 +1,17 @@
 export const getTournamentList = state => (
-    state.tournaments
-        ? Object.keys(state.tournaments).map((tournamentId) => ({
+    state.tournaments && state.tournaments.list
+        ? Object.keys(state.tournaments.list).map((tournamentId) => ({
             tournamentId,
-            title: state.tournaments[tournamentId].title
+            title: state.tournaments.list[tournamentId].title
         }))
         : []
+);
+
+export const getActiveTournament = state => (
+    (
+        state.tournaments
+        && state.tournaments.activeTournamentId
+        && state.tournaments.list
+        && state.tournaments.list[state.tournaments.activeTournamentId]
+    ) || null
 );

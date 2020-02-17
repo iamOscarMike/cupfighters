@@ -1,4 +1,4 @@
-import { START_NEW_TOURNAMENT } from "../actionTypes";
+import { START_NEW_TOURNAMENT, SET_ACTIVE_TOURNAMENT } from "../actionTypes";
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -6,10 +6,19 @@ export default function (state = {}, action) {
             const { title } = action.payload;
             const tournamentId = 'tournament#' + Math.random().toString(10).substr(2, 8);
             return {
-                ...state,
-                [tournamentId]: {
-                    title,
+                activeTournamentId: tournamentId,
+                list: {
+                    ...state.list,
+                    [tournamentId]: {
+                        title,
+                    },
                 },
+            };
+        }
+        case SET_ACTIVE_TOURNAMENT: {
+            return {
+                ...state,
+                activeTournamentId: action.payload.tournamentId,
             };
         }
         default:
