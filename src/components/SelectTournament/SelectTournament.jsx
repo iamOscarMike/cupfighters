@@ -1,10 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import NewTournament from "../NewTournament/NewTournament";
 import { getTournamentList } from "../../redux/selectors";
+import Icon from '@mdi/react';
+import { mdiPlayCircle } from '@mdi/js';
+import { setActiveTournament } from "../../redux/actions";
 
 function SelectTournament() {
     const tournaments = useSelector((state) => (getTournamentList(state)));
+    const dispatch = useDispatch();
     return (
         <div className="SelectTournament">
             <div className="row">
@@ -14,7 +18,15 @@ function SelectTournament() {
                     <ul className="list-group">
                         {
                             tournaments.map(({ tournamentId, title }) => (
-                                <li className="list-group-item heading tournament" key={tournamentId}>{title}</li>
+                                <li className="list-group-item heading tournament" key={tournamentId}>
+                                    {title}
+                                    <button
+                                        className="btn btn-primary btn-sm float-right"
+                                        onClick={() => dispatch(setActiveTournament(tournamentId))}
+                                    >
+                                        <Icon path={mdiPlayCircle} size={1} color="#29335c" />
+                                    </button>
+                                </li>
                             ))
                         }
                         <NewTournament />
