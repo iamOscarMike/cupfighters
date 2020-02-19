@@ -1,4 +1,8 @@
-import { START_NEW_TOURNAMENT, SET_ACTIVE_TOURNAMENT } from "../actionTypes";
+import {
+    START_NEW_TOURNAMENT,
+    SET_ACTIVE_TOURNAMENT,
+    UNSET_ACTIVE_TOURNAMENT,
+} from "../actionTypes";
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -19,6 +23,12 @@ export default function (state = {}, action) {
             return {
                 ...state,
                 activeTournamentId: action.payload.tournamentId,
+            };
+        }
+        case UNSET_ACTIVE_TOURNAMENT: {
+            return {
+                ...state,
+                activeTournamentId: null,
             };
         }
         default:

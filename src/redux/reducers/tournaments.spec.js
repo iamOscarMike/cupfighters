@@ -1,5 +1,9 @@
 import tournaments from "./tournaments";
-import { START_NEW_TOURNAMENT, SET_ACTIVE_TOURNAMENT } from "../actionTypes";
+import {
+    START_NEW_TOURNAMENT,
+    SET_ACTIVE_TOURNAMENT,
+    UNSET_ACTIVE_TOURNAMENT,
+} from "../actionTypes";
 
 describe('tournaments', () => {
     it('adds a new started tournament to the store', () => {
@@ -37,6 +41,14 @@ describe('tournaments', () => {
             payload: { tournamentId },
         })
         expect(store.activeTournamentId).toEqual(tournamentId);
+    });
+
+    it('unsets an active tournament', () => {
+        const store = tournaments(
+            { activeTournamentId: 'tournament#123' },
+            { type: UNSET_ACTIVE_TOURNAMENT },
+        );
+        expect(store.activeTournamentId).toEqual(null);
     });
 
     it('does nothing for unknown actions', () => {
