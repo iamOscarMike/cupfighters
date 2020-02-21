@@ -7,9 +7,7 @@ import SelectTournament from '../../components/SelectTournament/SelectTournament
 
 configure({ adapter: new Adapter() });
 
-jest.mock("react-redux", () => ({
-    useSelector: jest.fn(fn => fn()),
-}));
+jest.mock("react-redux");
 
 describe('App', () => {
     afterEach(() => { jest.clearAllMocks() });

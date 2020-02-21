@@ -24,4 +24,9 @@
         display: -ms-grid;
         -ms-grid-columns: min-content;
     }
+
+    button.back {
+        position: absolute;
+        top: 3.5rem;
+    }
 }
