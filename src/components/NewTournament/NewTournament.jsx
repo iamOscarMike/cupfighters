@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './NewTournament.scss';
 import { startNewTournament } from "../../redux/actions"
 import { useDispatch } from 'react-redux'
 
@@ -14,13 +15,13 @@ function NewTournament() {
     };
 
     return (
-        <li className="list-group-item heading NewTournament" key="new-tournament">
+        <li className="NewTournament list-group-item heading" key="new-tournament">
             <form onSubmit={handleStartNewTournament}>
                 <div className="form-group row mb-0">
                     <div className="col-sm-8">
                         <input
                             type="text"
-                            className="form-control heading"
+                            className="form-control"
                             placeholder="Start new tournament"
                             value={input}
                             onChange={handleInputChange}
