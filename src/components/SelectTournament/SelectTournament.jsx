@@ -5,7 +5,7 @@ import NewTournament from "../NewTournament/NewTournament";
 import { getTournamentList } from "../../redux/selectors";
 import Icon from '@mdi/react';
 import { mdiPlayCircle, mdiTrashCanOutline } from '@mdi/js';
-import { setActiveTournament } from "../../redux/actions";
+import { setActiveTournament, deleteTournament } from "../../redux/actions";
 
 function SelectTournament() {
     const tournaments = useSelector((state) => (getTournamentList(state)));
@@ -21,10 +21,12 @@ function SelectTournament() {
                             tournaments.map(({ tournamentId, title }) => (
                                 <li className="list-group-item tournament" key={tournamentId}>
                                     {title}
+                                    
                                     <button
                                         className="btn btn-secondary btn-sm float-right ml-2"
                                         onClick={() => {
                                             if(window.confirm(`Are you sure you want to delete '${title}'?`)) {
+                                                dispatch(deleteTournament(tournamentId))
                                             }
                                         }}
                                     >

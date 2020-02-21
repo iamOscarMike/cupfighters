@@ -3,6 +3,7 @@ import {
     START_NEW_TOURNAMENT,
     SET_ACTIVE_TOURNAMENT,
     UNSET_ACTIVE_TOURNAMENT,
+    DELETE_TOURNAMENT,
 } from "../actionTypes";
 
 describe('tournaments', () => {
@@ -49,6 +50,15 @@ describe('tournaments', () => {
             { type: UNSET_ACTIVE_TOURNAMENT },
         );
         expect(store.activeTournamentId).toEqual(null);
+    });
+
+    it('deletes a tournament', () => {
+        const tournamentId = 'tournament#123';
+        const store = tournaments(
+            { list: { [tournamentId]: {} } },
+            { type: DELETE_TOURNAMENT, payload: { tournamentId } },
+        );
+        expect(store.list).toEqual({});
     });
 
     it('does nothing for unknown actions', () => {

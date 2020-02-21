@@ -2,6 +2,7 @@ import {
     START_NEW_TOURNAMENT,
     SET_ACTIVE_TOURNAMENT,
     UNSET_ACTIVE_TOURNAMENT,
+    DELETE_TOURNAMENT,
 } from "../actionTypes";
 
 export default function (state = {}, action) {
@@ -30,6 +31,10 @@ export default function (state = {}, action) {
                 ...state,
                 activeTournamentId: null,
             };
+        }
+        case DELETE_TOURNAMENT: {
+            delete state.list[action.payload.tournamentId];
+            return state;
         }
         default:
             return state;

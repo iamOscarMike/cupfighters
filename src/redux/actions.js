@@ -1,7 +1,8 @@
-import { 
-    START_NEW_TOURNAMENT, 
-    SET_ACTIVE_TOURNAMENT, 
-    UNSET_ACTIVE_TOURNAMENT, 
+import {
+    START_NEW_TOURNAMENT,
+    SET_ACTIVE_TOURNAMENT,
+    UNSET_ACTIVE_TOURNAMENT,
+    DELETE_TOURNAMENT,
 } from "./actionTypes";
 
 export const startNewTournament = title => ({
@@ -19,3 +20,10 @@ export const setActiveTournament = tournamentId => ({
 });
 
 export const unsetActiveTournament = () => ({ type: UNSET_ACTIVE_TOURNAMENT });
+
+export const deleteTournament = tournamentId => ({
+    type: DELETE_TOURNAMENT,
+    payload: {
+        tournamentId,
+    },
+});

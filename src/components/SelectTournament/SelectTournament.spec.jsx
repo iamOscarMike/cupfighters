@@ -4,11 +4,12 @@ import { shallow, configure } from 'enzyme';
 import { useSelector, useDispatch } from "react-redux";
 import SelectTournament from './SelectTournament';
 import NewTournament from '../NewTournament/NewTournament';
-import { SET_ACTIVE_TOURNAMENT } from '../../redux/actionTypes';
+import { SET_ACTIVE_TOURNAMENT, DELETE_TOURNAMENT } from '../../redux/actionTypes';
 
 configure({ adapter: new Adapter() });
 
 jest.mock('react-redux');
+global.confirm = () => true;
 
 describe('SelectTournament', () => {
 
@@ -33,7 +34,17 @@ describe('SelectTournament', () => {
         useSelector.mockImplementation(() => [{ tournamentId, title: 'My tournament' }]);
         useDispatch.mockImplementation(() => dispatch);
         const selectTournament = shallow(<SelectTournament />);
-        selectTournament.find('button').simulate('click');
+        selectTournament.find('button').at(1).simulate('click');
         expect(dispatch).toHaveBeenCalledWith({ type: SET_ACTIVE_TOURNAMENT, payload: { tournamentId } });
+    });
+
+    it('removes a tournament on click delete', () => {
+        const dispatch = jest.fn(() => { });
+        const tournamentId = 'tournament#123';
+        useSelector.mockImplementation(() => [{ tournamentId, title: 'My tournament' }]);
+        useDispatch.mockImplementation(() => dispatch);
+        const selectTournament = shallow(<SelectTournament />);
+        selectTournament.find('button').at(0).simulate('click');
+        expect(dispatch).toHaveBeenCalledWith({ type: DELETE_TOURNAMENT, payload: { tournamentId } });
     });
 });
