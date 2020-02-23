@@ -1,0 +1,24 @@
+.Tournament {
+    .logo-container {
+        margin-top: 2rem;
+
+        img.logo {
+            height: 3rem;
+            margin-right: 1rem;
+        }
+
+        .logo-text {
+            font-size: 3rem;
+            line-height: 1;
+        }
+    }
+
+    .header-container {
+        margin-top: 4rem;
+    }
+
+    button.back {
+        position: absolute;
+        top: 3.5rem;
+    }
+}

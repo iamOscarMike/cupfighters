@@ -12,6 +12,12 @@ function SelectTournament() {
     const dispatch = useDispatch();
     return (
         <div className="SelectTournament">
+            <div className="row header-container">
+                <div className="m-auto">
+                    <img className="logo float-left" src="/images/cupfighters.svg" />
+                    <h1 className="text-primary">Cup Fighters</h1>
+                </div>
+            </div>
             <div className="row">
                 <div className="col-lg-8 offset-lg-2 col-md-12">
                     <h2 className="text-center mt-5">Tournaments</h2>

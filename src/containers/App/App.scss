@@ -1,32 +1,4 @@
 .App {
     margin: 1rem;
     font-family: Arial, Helvetica, sans-serif;
-
-    .header-container {
-        margin-top: 3em;
-        margin-bottom: 2em;
-    }
-
-    img.logo {
-        height: 6rem;
-        margin-right: 1rem;
-    }
-
-    h1 {
-        font-size: 3rem;
-        line-height: 1;
-        word-spacing: 100vw;
-        width: min-intrinsic;
-        width: -webkit-min-content;
-        width: -moz-min-content;
-        width: min-content;
-        display: table-caption;
-        display: -ms-grid;
-        -ms-grid-columns: min-content;
-    }
-
-    button.back {
-        position: absolute;
-        top: 3.5rem;
-    }
 }
