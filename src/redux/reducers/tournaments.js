@@ -4,6 +4,7 @@ import {
     UNSET_ACTIVE_TOURNAMENT,
     DELETE_TOURNAMENT,
 } from "../actionTypes";
+import { stages } from "../../types/stages";
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -15,6 +16,7 @@ export default function (state = {}, action) {
                 list: {
                     ...state.list,
                     [tournamentId]: {
+                        stage: stages.setup,
                         title,
                     },
                 },

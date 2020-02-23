@@ -5,6 +5,7 @@ import { shallow, configure } from 'enzyme';
 import { useSelector } from "react-redux";
 import SelectTournament from '../../components/SelectTournament/SelectTournament';
 import Tournament from '../Tournament/Tournament';
+import { stages } from '../../types/stages';
 
 configure({ adapter: new Adapter() });
 
@@ -21,7 +22,7 @@ describe('App', () => {
     });
 
     it('renders the current active tournament', () => {
-        useSelector.mockImplementation(() => ({ title: 'My active tournament' }));
+        useSelector.mockImplementation(() => ({ title: 'My active tournament', stage: stages.setup }));
         const app = shallow(<App />);
         expect(app.find(Tournament).length).toEqual(1);
     });

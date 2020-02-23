@@ -5,6 +5,7 @@ import {
     UNSET_ACTIVE_TOURNAMENT,
     DELETE_TOURNAMENT,
 } from "../actionTypes";
+import { stages } from "../../types/stages";
 
 describe('tournaments', () => {
     it('adds a new started tournament to the store', () => {
@@ -15,7 +16,7 @@ describe('tournaments', () => {
         });
         const newTournamentId = Object.keys(store.list)[0];
         expect(store.activeTournamentId).toEqual(newTournamentId);
-        expect(store.list[newTournamentId]).toEqual(payload);
+        expect(store.list[newTournamentId]).toEqual({ ...payload, stage: stages.setup });
     });
 
     it('keeps my old tournaments in the store', () => {
@@ -32,7 +33,7 @@ describe('tournaments', () => {
         const newTournamentId = Object.keys(store.list)[1];
         expect(store.list[oldTournamentKey]).toEqual(oldTournament);
         expect(store.activeTournamentId).toEqual(newTournamentId)
-        expect(store.list[newTournamentId]).toEqual(payload);
+        expect(store.list[newTournamentId]).toEqual({ ...payload, stage: stages.setup });
     });
 
     it('sets a tournament as active', () => {

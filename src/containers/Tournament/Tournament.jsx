@@ -5,10 +5,12 @@ import Icon from '@mdi/react';
 import { mdiArrowLeftCircle } from '@mdi/js';
 import { useDispatch } from "react-redux";
 import { unsetActiveTournament } from "../../redux/actions";
+import { stages } from "../../types/stages";
+import Setup from "../../components/Tournament/Setup/Setup";
 
 function Tournament({ tournament }) {
     const dispatch = useDispatch();
-    
+
     return (
         <div className="Tournament">
             <div className="row logo-container">
@@ -31,12 +33,15 @@ function Tournament({ tournament }) {
                     color="#85ffc7"
                 />
             </button>
+
+            {tournament.stage === stages.setup && <Setup />}
         </div>
     );
 };
 
 Tournament.propTypes = {
     tournament: PropTypes.shape({
+        stage: PropTypes.oneOf(Object.values(stages)).isRequired,
         title: PropTypes.string.isRequired,
     }).isRequired,
 };
