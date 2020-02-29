@@ -5,7 +5,10 @@ function AddPlayerForm({ players, maxPlayersReached, addPlayerCallback }) {
     const [input, setInput] = useState('');
     const [invalidFeedback, setInvalidFeedback] = useState('');
 
-    const changeInput = (event) => setInput(event.target.value);
+    const changeInput = (event) => {
+        setInput(event.target.value);
+        setInvalidFeedback('')
+    };
     const validateInput = () => {
         if (!input) {
             setInvalidFeedback('Player cannot be empty');
