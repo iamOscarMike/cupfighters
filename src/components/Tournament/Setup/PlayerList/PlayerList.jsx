@@ -4,7 +4,7 @@ import Icon from '@mdi/react';
 import { mdiAccountCircle, mdiAccountEdit, mdiTrashCan } from '@mdi/js';
 import './PlayerList.scss';
 
-function PlayerList({ players, deletePlayer }) {
+function PlayerList({ players, deletePlayer, updatePlayer }) {
     if (!players.length) {
         return null;
     }
@@ -26,10 +26,10 @@ function PlayerList({ players, deletePlayer }) {
                                         </span>
                                         <strong>{player.name}</strong>
                                         <span className="actions float-right">
-                                            <button className="btn btn-secondary btn-sm mr-1" onClick={() => { }}>
+                                            <button className="btn btn-secondary btn-sm mr-1" onClick={() => { updatePlayer(player.name) }}>
                                                 <Icon path={mdiAccountEdit} size={1} color="#29335C" />
                                             </button>
-                                            <button className="btn btn-secondary btn-sm" onClick={() => {deletePlayer(player.name)}}>
+                                            <button className="btn btn-secondary btn-sm" onClick={() => { deletePlayer(player.name) }}>
                                                 <Icon path={mdiTrashCan} size={1} color="#29335C" />
                                             </button>
                                         </span>

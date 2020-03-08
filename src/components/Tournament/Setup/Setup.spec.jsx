@@ -47,4 +47,21 @@ describe('Setup', () => {
         expect(setup.find(PlayerList).props().players).not.toContain('Tomasson');
         expect(setup.find(PlayerList).props().players).toContain('Shinji Ono');
     });
+
+    it('updates a player from the list', () => {
+        const setup = mount(<Setup />);
+
+        const addPlayerForm = setup.find(AddPlayerForm);
+        addPlayerForm.find('input').simulate('change', { target: { value: 'Tomasson' } });
+        addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
+        addPlayerForm.find('input').simulate('change', { target: { value: 'Shinji Ono' } });
+        addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
+
+        const playerList = setup.find(PlayerList);
+        playerList.find('button').at(0).simulate('click');
+
+        expect(setup.find(PlayerList).props().players).not.toContain('Tomasson');
+        expect(setup.find(AddPlayerForm).find('input').props().value).toMatch('Tomasson');
+        expect(setup.find(PlayerList).props().players).toContain('Shinji Ono');
+    });
 });

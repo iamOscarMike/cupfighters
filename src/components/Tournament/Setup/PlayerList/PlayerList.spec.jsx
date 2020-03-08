@@ -8,7 +8,8 @@ configure({ adapter: new Adapter() });
 describe('PlayerList', () => {
     const players = ['van Bronckhorst', 'van Gastel', 'Kuyt'];
     const deletePlayer = jest.fn();
-    const render = () => (shallow(<PlayerList players={players}  deletePlayer={deletePlayer}/>));
+    const updatePlayer = jest.fn();
+    const render = () => (shallow(<PlayerList players={players}  deletePlayer={deletePlayer} updatePlayer={updatePlayer} />));
 
     it('renders a list of players', () => {
         const playerList = render();
@@ -22,5 +23,11 @@ describe('PlayerList', () => {
         const playerList = render();
         playerList.find('button').at(1).simulate('click');
         expect(deletePlayer).toBeCalledWith('van Bronckhorst');
+    });
+
+    it('calls updatePlayer on click update', () => {
+        const playerList = render();
+        playerList.find('button').at(0).simulate('click');
+        expect(updatePlayer).toBeCalledWith('van Bronckhorst');
     });
 });

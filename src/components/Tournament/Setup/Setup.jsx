@@ -15,6 +15,10 @@ function Setup() {
         }
         setPlayers([...newPlayers]);
     };
+    const updatePlayer = (player) => {
+        deletePlayer(player);
+        setInput(player);
+    };
 
     return (
         <div className="Setup">
@@ -25,7 +29,11 @@ function Setup() {
                 setInput={setInput}
                 addPlayerCallback={addPlayer}
             />
-            <PlayerList players={players} deletePlayer={deletePlayer} />
+            <PlayerList
+                players={players}
+                deletePlayer={deletePlayer}
+                updatePlayer={updatePlayer}
+            />
         </div>
     );
 }
