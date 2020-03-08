@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import AddPlayerForm from "./AddPlayerForm/AddPlayerForm";
 import PlayerList from "./PlayerList/PlayerList";
+import SelectPlayersInKnockout from "./SelectPlayersInKnockout/SelectPlayersInKnockout";
 
 function Setup() {
     const [players, setPlayers] = useState([]);
     const [input, setInput] = useState('');
+    const [amountOfPlayersInKnockout, setAmountOfPlayersInKnockout] = useState(null);
 
     const addPlayer = (player) => setPlayers([...players, player]);
     const deletePlayer = (player) => {
@@ -34,6 +36,7 @@ function Setup() {
                 deletePlayer={deletePlayer}
                 updatePlayer={updatePlayer}
             />
+            <SelectPlayersInKnockout players={players} setAmountOfPlayersInKnockout={setAmountOfPlayersInKnockout} />
         </div>
     );
 }
