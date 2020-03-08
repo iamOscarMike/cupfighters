@@ -4,6 +4,8 @@ import PlayerList from "./PlayerList/PlayerList";
 
 function Setup() {
     const [players, setPlayers] = useState([]);
+    const [input, setInput] = useState('');
+
     const addPlayer = (player) => setPlayers([...players, player]);
     const deletePlayer = (player) => {
         const newPlayers = players;
@@ -16,7 +18,13 @@ function Setup() {
 
     return (
         <div className="Setup">
-            <AddPlayerForm players={players} maxPlayersReached={players.length >= 16} addPlayerCallback={addPlayer} />
+            <AddPlayerForm
+                players={players}
+                maxPlayersReached={players.length >= 16}
+                input={input}
+                setInput={setInput}
+                addPlayerCallback={addPlayer}
+            />
             <PlayerList players={players} deletePlayer={deletePlayer} />
         </div>
     );

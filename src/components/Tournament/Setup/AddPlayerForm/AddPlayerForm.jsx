@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 
-function AddPlayerForm({ players, maxPlayersReached, addPlayerCallback }) {
-    const [input, setInput] = useState('');
+function AddPlayerForm({ players, maxPlayersReached, addPlayerCallback, input, setInput }) {
     const [invalidFeedback, setInvalidFeedback] = useState('');
 
     const changeInput = (event) => {
@@ -66,6 +65,8 @@ function AddPlayerForm({ players, maxPlayersReached, addPlayerCallback }) {
 AddPlayerForm.propTypes = {
     maxPlayersReached: PropTypes.bool.isRequired,
     players: PropTypes.array,
+    input: PropTypes.string.isRequired,
+    setInput: PropTypes.func.isRequired,
 }
 
 AddPlayerForm.defaultProps = {
