@@ -31,12 +31,15 @@ function Setup() {
                 setInput={setInput}
                 addPlayerCallback={addPlayer}
             />
+            <SelectPlayersInKnockout
+                players={players}
+                setAmountOfPlayersInKnockout={setAmountOfPlayersInKnockout}
+            />
             <PlayerList
                 players={players}
                 deletePlayer={deletePlayer}
                 updatePlayer={updatePlayer}
             />
-            <SelectPlayersInKnockout players={players} setAmountOfPlayersInKnockout={setAmountOfPlayersInKnockout} />
         </div>
     );
 }
