@@ -4,6 +4,8 @@ import { configure, mount } from 'enzyme';
 import Setup from './Setup';
 import AddPlayerForm from './AddPlayerForm/AddPlayerForm';
 import PlayerList from './PlayerList/PlayerList';
+import SelectPlayersInKnockout from './SelectPlayersInKnockout/SelectPlayersInKnockout';
+import SelectGroupSize from './SelectGroupSize/SelectGroupSize';
 
 configure({ adapter: new Adapter() });
 
@@ -63,5 +65,40 @@ describe('Setup', () => {
         expect(setup.find(PlayerList).props().players).not.toContain('Tomasson');
         expect(setup.find(AddPlayerForm).find('input').props().value).toMatch('Tomasson');
         expect(setup.find(PlayerList).props().players).toContain('Shinji Ono');
+    });
+
+    it('shows an initial disabled complete button', () => {
+        const setup = mount(<Setup />);
+        expect(setup.find('button.btn-outline-primary').at(0).text()).toEqual('Continue');
+        expect(setup.find('button.btn-outline-primary').at(0).props().disabled).toEqual(true);
+    });
+
+    it('shows an enabled complete button', () => {
+        const setup = mount(<Setup />);
+
+        const addPlayerForm = setup.find(AddPlayerForm);
+        addPlayerForm.find('input').simulate('change', { target: { value: 'Tomasson' } });
+        addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
+        addPlayerForm.find('input').simulate('change', { target: { value: 'Shinji Ono' } });
+        addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
+        addPlayerForm.find('input').simulate('change', { target: { value: 'Kiprich' } });
+        addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
+        addPlayerForm.find('input').simulate('change', { target: { value: 'van Gastel' } });
+        addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
+
+        const selectPlayersInKnockout = setup.find(SelectPlayersInKnockout);
+        selectPlayersInKnockout.find('option').at(0).instance().selected = false;
+        selectPlayersInKnockout.find('option').at(1).instance().selected = true;
+        selectPlayersInKnockout.find('select').simulate('change');
+
+        const selectGroupSize = setup.find(SelectGroupSize);
+        selectGroupSize.find('option').at(0).instance().selected = false;
+        selectGroupSize.find('option').at(1).instance().selected = true;
+        selectGroupSize.find('select').simulate('change');
+        
+        console.log(setup.debug());
+
+        expect(setup.find('button.btn-outline-primary').at(0).text()).toEqual('Continue');
+        expect(setup.find('button.btn-outline-primary').at(0).props().disabled).toEqual(false);
     });
 });

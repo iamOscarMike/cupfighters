@@ -23,6 +23,7 @@ function Setup() {
         deletePlayer(player);
         setInput(player);
     };
+    const allowNextStage = () => (players && groupSize && amountOfPlayersInKnockout);
 
     return (
         <div className="Setup">
@@ -46,6 +47,17 @@ function Setup() {
                 deletePlayer={deletePlayer}
                 updatePlayer={updatePlayer}
             />
+
+            <div className="row">
+                <button
+                    type="button"
+                    className={'btn btn-outline-primary btn-lg m-auto' + (allowNextStage() ? '' : ' disabled')}
+                    disabled={!allowNextStage()}
+                    onClick={() => { }}
+                >
+                    Continue
+                    </button>
+            </div>
         </div>
     );
 }
