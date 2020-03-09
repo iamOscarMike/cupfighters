@@ -13,7 +13,7 @@ function SelectPlayersInKnockout({ players, setAmountOfPlayersInKnockout }) {
     };
 
     return (
-        <div className="SelectPlayersInKnockout form-group row">
+        <div className="SelectPlayersInKnockout row">
             <div className="col-sm-12 col-md-6 offset-md-3">
                 <div className="form-group row">
                     <label htmlFor="knockOut" className="col-sm-3 col-form-label">Amount in knock out</label>
