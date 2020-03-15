@@ -3,12 +3,15 @@ import AddPlayerForm from "./AddPlayerForm/AddPlayerForm";
 import PlayerList from "./PlayerList/PlayerList";
 import SelectPlayersInKnockout from "./SelectPlayersInKnockout/SelectPlayersInKnockout";
 import SelectGroupSize from "./SelectGroupSize/SelectGroupSize";
+import { finishSetup } from "../../../redux/actions";
+import { useDispatch } from "react-redux";
 
 function Setup() {
     const [players, setPlayers] = useState([]);
     const [input, setInput] = useState('');
-    const [amountOfPlayersInKnockout, setAmountOfPlayersInKnockout] = useState(null);
+    const [amountOfPlayersInKnockOut, setamountOfPlayersInKnockOut] = useState(null);
     const [groupSize, setGroupSize] = useState(null);
+    const dispatch = useDispatch();
 
     const addPlayer = (player) => setPlayers([...players, player]);
     const deletePlayer = (player) => {
@@ -23,7 +26,7 @@ function Setup() {
         deletePlayer(player);
         setInput(player);
     };
-    const allowNextStage = () => (players && groupSize && amountOfPlayersInKnockout);
+    const allowNextStage = () => (players && groupSize && amountOfPlayersInKnockOut);
 
     return (
         <div className="Setup">
@@ -36,7 +39,7 @@ function Setup() {
             />
             <SelectPlayersInKnockout
                 players={players}
-                setAmountOfPlayersInKnockout={setAmountOfPlayersInKnockout}
+                setamountOfPlayersInKnockOut={setamountOfPlayersInKnockOut}
             />
             <SelectGroupSize
                 players={players}
@@ -53,10 +56,12 @@ function Setup() {
                     type="button"
                     className={'btn btn-outline-primary btn-lg m-auto' + (allowNextStage() ? '' : ' disabled')}
                     disabled={!allowNextStage()}
-                    onClick={() => { }}
+                    onClick={() => {
+                        dispatch(finishSetup(players, parseInt(amountOfPlayersInKnockOut), parseInt(groupSize)))
+                    }}
                 >
                     Continue
-                    </button>
+                </button>
             </div>
         </div>
     );

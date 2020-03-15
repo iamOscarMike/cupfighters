@@ -4,6 +4,7 @@ import {
     SET_ACTIVE_TOURNAMENT,
     UNSET_ACTIVE_TOURNAMENT,
     DELETE_TOURNAMENT,
+    FINISH_SETUP,
 } from "../actionTypes";
 import { stages } from "../../types/stages";
 
@@ -69,5 +70,44 @@ describe('tournaments', () => {
             payload,
         });
         expect(store).toEqual({});
+    });
+
+    it('finishes the setup', () => {
+        const tournamentId = 'tournament#123';
+        const tournamentTitle = 'My activeTournament';
+        const players = ['Ono', 'Tomasson'];
+        const amountOfPlayersInKnockOut = 2;
+        const groupSize = 3;
+        const payload = { tournamentId, players, amountOfPlayersInKnockOut, groupSize };
+
+        const otherTournamentId = 'tournament#456';
+        const otherTournament = { title: 'My inactive tournament' };
+
+        const store = tournaments(
+            {
+                activeTournamentId: 'tournament#123',
+                list: {
+                    [tournamentId]: {
+                        title: tournamentTitle,
+                        stage: stages.setup,
+                    },
+                    [otherTournamentId]: otherTournament,
+                },
+            },
+            {
+                type: FINISH_SETUP,
+                payload,
+            }
+        )
+
+        expect(store.activeTournamentId).toEqual(tournamentId);
+
+        expect(store.list[tournamentId].title).toEqual(tournamentTitle);
+        expect(store.list[tournamentId].stage).toEqual(stages.groupStage);
+        expect(store.list[tournamentId].players).toBeInstanceOf(Object);
+        expect(store.list[tournamentId].amountOfPlayersInKnockOut).toEqual(amountOfPlayersInKnockOut);
+        expect(store.list[tournamentId].groupSize).toEqual(groupSize);
+
+        expect(store.list[otherTournamentId]).toEqual(otherTournament);
     });
 });

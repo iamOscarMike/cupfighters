@@ -5,12 +5,12 @@ import SelectPlayersInKnockout from './SelectPlayersInKnockout';
 
 configure({ adapter: new Adapter() });
 
-const mockSetAmountOfPlayersInKnockout = jest.fn();
+const mockSetamountOfPlayersInKnockOut = jest.fn();
 
 describe('SelectPlayersInKnockout', () => {
     it('renders a dropdownlist without valid options when there are too few players', () => {
         const selectPlayersInKnockout = shallow(<SelectPlayersInKnockout
-            setAmountOfPlayersInKnockout={mockSetAmountOfPlayersInKnockout}
+            setamountOfPlayersInKnockOut={mockSetamountOfPlayersInKnockOut}
             players={['Roy Makaay']}
         />);
         expect(selectPlayersInKnockout.find('option').at(1).text()).toEqual('Unable to pick amount with 1 players');
@@ -18,7 +18,7 @@ describe('SelectPlayersInKnockout', () => {
 
     it('renders a dropdownlist with 2 options based on the amount of players', () => {
         const selectPlayersInKnockout = shallow(<SelectPlayersInKnockout
-            setAmountOfPlayersInKnockout={mockSetAmountOfPlayersInKnockout}
+            setamountOfPlayersInKnockOut={mockSetamountOfPlayersInKnockOut}
             players={[
                 'Roy Makaay',
                 'Robin van Persie',
@@ -37,14 +37,14 @@ describe('SelectPlayersInKnockout', () => {
                 'Peter Houtman',
                 'Graziano Pelle',
             ]}
-            setAmountOfPlayersInKnockout={mockSetAmountOfPlayersInKnockout}
+            setamountOfPlayersInKnockOut={mockSetamountOfPlayersInKnockOut}
         />);
         expect(selectPlayersInKnockout.find('option')).toHaveLength(3);
     });
 
     it('renders a dropdownlist with 4 options based on the amount of players', () => {
         const selectPlayersInKnockout = shallow(<SelectPlayersInKnockout
-            setAmountOfPlayersInKnockout={mockSetAmountOfPlayersInKnockout}
+            setamountOfPlayersInKnockOut={mockSetamountOfPlayersInKnockOut}
             players={[
                 'Roy Makaay',
                 'Robin van Persie',
@@ -60,9 +60,9 @@ describe('SelectPlayersInKnockout', () => {
         expect(selectPlayersInKnockout.find('option')).toHaveLength(4);
     });
 
-    it('it calls setAmountOfPlayersInKnockout on change', () => {
+    it('it calls setamountOfPlayersInKnockOut on change', () => {
         const selectPlayersInKnockout = mount(<SelectPlayersInKnockout
-            setAmountOfPlayersInKnockout={mockSetAmountOfPlayersInKnockout}
+            setamountOfPlayersInKnockOut={mockSetamountOfPlayersInKnockOut}
             players={[
                 'Roy Makaay',
                 'Robin van Persie',
@@ -73,6 +73,6 @@ describe('SelectPlayersInKnockout', () => {
         selectPlayersInKnockout.find('option').at(0).instance().selected = false;
         selectPlayersInKnockout.find('option').at(1).instance().selected = true;
         selectPlayersInKnockout.find('select').simulate('change');
-        expect(mockSetAmountOfPlayersInKnockout).toBeCalledWith('2');
+        expect(mockSetamountOfPlayersInKnockOut).toBeCalledWith('2');
     });
 });

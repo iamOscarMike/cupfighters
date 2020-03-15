@@ -6,8 +6,11 @@ import AddPlayerForm from './AddPlayerForm/AddPlayerForm';
 import PlayerList from './PlayerList/PlayerList';
 import SelectPlayersInKnockout from './SelectPlayersInKnockout/SelectPlayersInKnockout';
 import SelectGroupSize from './SelectGroupSize/SelectGroupSize';
+import { useDispatch } from "react-redux";
+import { FINISH_SETUP } from '../../../redux/actionTypes';
 
 configure({ adapter: new Adapter() });
+jest.mock('react-redux');
 
 describe('Setup', () => {
     it('renders AddPlayerForm', () => {
@@ -74,6 +77,8 @@ describe('Setup', () => {
     });
 
     it('shows an enabled complete button', () => {
+        const dispatch = jest.fn(() => { });
+        useDispatch.mockImplementation(() => dispatch);
         const setup = mount(<Setup />);
 
         const addPlayerForm = setup.find(AddPlayerForm);
@@ -95,10 +100,23 @@ describe('Setup', () => {
         selectGroupSize.find('option').at(0).instance().selected = false;
         selectGroupSize.find('option').at(1).instance().selected = true;
         selectGroupSize.find('select').simulate('change');
-        
-        console.log(setup.debug());
 
         expect(setup.find('button.btn-outline-primary').at(0).text()).toEqual('Continue');
         expect(setup.find('button.btn-outline-primary').at(0).props().disabled).toEqual(false);
+
+        setup.find('button.btn-outline-primary').at(0).simulate('click');
+        expect(dispatch).toHaveBeenCalledWith({
+            type: FINISH_SETUP, 
+            payload: {
+                players: [
+                    'Tomasson',
+                    'Shinji Ono',
+                    'Kiprich',
+                    'van Gastel',
+                ],
+                amountOfPlayersInKnockOut: 2,
+                groupSize: 2,
+            }
+        });
     });
 });

@@ -3,12 +3,14 @@ import {
     setActiveTournament,
     unsetActiveTournament,
     deleteTournament,
+    finishSetup,
 } from "./actions";
 import {
     START_NEW_TOURNAMENT,
     SET_ACTIVE_TOURNAMENT,
     UNSET_ACTIVE_TOURNAMENT,
     DELETE_TOURNAMENT,
+    FINISH_SETUP,
 } from "./actionTypes";
 
 describe('actions', () => {
@@ -43,5 +45,14 @@ describe('actions', () => {
         const tournamentId = 'tournament#123';
         const expectedAction = { type: DELETE_TOURNAMENT, payload: { tournamentId } };
         expect(deleteTournament(tournamentId)).toEqual(expectedAction);
+    });
+
+    it('creates a finish setup action', () => {
+        const tournamentId = 'tournament#123';
+        const players = ['Ono', 'Tomasson'];
+        const amountOfPlayersInKnockOut = 2;
+        const groupSize = 3;
+        const expectedAction = { type: FINISH_SETUP, payload: { players, amountOfPlayersInKnockOut, groupSize } };
+        expect(finishSetup(players, amountOfPlayersInKnockOut, groupSize)).toEqual(expectedAction);
     });
 });

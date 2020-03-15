@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-function SelectPlayersInKnockout({ players, setAmountOfPlayersInKnockout }) {
+function SelectPlayersInKnockout({ players, setamountOfPlayersInKnockOut }) {
     const getOptions = () => {
         const amountsOfPlayers = ([2, 4, 8]).filter((amount) => (amount < players.length));
         const options = amountsOfPlayers.map((amount) => (
@@ -18,7 +18,7 @@ function SelectPlayersInKnockout({ players, setAmountOfPlayersInKnockout }) {
                 <div className="form-group row">
                     <label htmlFor="knockOut" className="col-sm-3 col-form-label">Amount in knock out</label>
                     <div className="col-sm-9">
-                        <select id="knockOut" className="form-control" onChange={(event) => { setAmountOfPlayersInKnockout(event.target.value) }}>
+                        <select id="knockOut" className="form-control" onChange={(event) => { setamountOfPlayersInKnockOut(event.target.value) }}>
                             <option value={null}></option>
                             {getOptions()}
                         </select>
@@ -31,7 +31,7 @@ function SelectPlayersInKnockout({ players, setAmountOfPlayersInKnockout }) {
 
 SelectPlayersInKnockout.propTypes = {
     players: PropTypes.array.isRequired,
-    setAmountOfPlayersInKnockout: PropTypes.func.isRequired,
+    setamountOfPlayersInKnockOut: PropTypes.func.isRequired,
 };
 
 export default SelectPlayersInKnockout;

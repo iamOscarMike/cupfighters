@@ -3,6 +3,7 @@ import {
     SET_ACTIVE_TOURNAMENT,
     UNSET_ACTIVE_TOURNAMENT,
     DELETE_TOURNAMENT,
+    FINISH_SETUP,
 } from "./actionTypes";
 
 export const startNewTournament = title => ({
@@ -25,5 +26,14 @@ export const deleteTournament = tournamentId => ({
     type: DELETE_TOURNAMENT,
     payload: {
         tournamentId,
+    },
+});
+
+export const finishSetup = (players, amountOfPlayersInKnockOut, groupSize) => ({
+    type: FINISH_SETUP,
+    payload: {
+        players,
+        amountOfPlayersInKnockOut,
+        groupSize,
     },
 });
