@@ -75,8 +75,8 @@ describe('tournaments', () => {
     it('finishes the setup', () => {
         const tournamentId = 'tournament#123';
         const tournamentTitle = 'My activeTournament';
-        const players = ['Ono', 'Tomasson'];
-        const amountOfPlayersInKnockOut = 2;
+        const players = ['Ono', 'Tomasson', 'van Hooijdonk', 'van Persie', 'Pauwe', 'Leonardo'];
+        const amountOfPlayersInKnockOut = 4;
         const groupSize = 3;
         const payload = { tournamentId, players, amountOfPlayersInKnockOut, groupSize };
 
@@ -98,7 +98,7 @@ describe('tournaments', () => {
                 type: FINISH_SETUP,
                 payload,
             }
-        )
+        );
 
         expect(store.activeTournamentId).toEqual(tournamentId);
 
@@ -107,7 +107,12 @@ describe('tournaments', () => {
         expect(store.list[tournamentId].players).toBeInstanceOf(Object);
         expect(store.list[tournamentId].amountOfPlayersInKnockOut).toEqual(amountOfPlayersInKnockOut);
         expect(store.list[tournamentId].groupSize).toEqual(groupSize);
-
+        expect(store.list[tournamentId].groups).toBeInstanceOf(Array);
+        expect(store.list[tournamentId].groups[0]).toBeInstanceOf(Object);
+        expect(store.list[tournamentId].groups[0].players).toBeInstanceOf(Array);
+        expect(store.list[tournamentId].groups[0].matches).toBeInstanceOf(Array);
+        expect(store.list[tournamentId].groups[0].matches[0]).toMatch(/match#([0-9]{10})/);
+        expect(store.list[tournamentId].matches).toBeInstanceOf(Object);
         expect(store.list[otherTournamentId]).toEqual(otherTournament);
     });
 });

@@ -7,6 +7,7 @@ import {
 } from "../actionTypes";
 import { stages } from "../../types/stages";
 import generatePlayers from "./tournaments/generatePlayers";
+import generateGroups from "./tournaments/generateGroups";
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -41,7 +42,19 @@ export default function (state = {}, action) {
             return state;
         }
         case FINISH_SETUP: {
-            const { players, amountOfPlayersInKnockOut, groupSize } = action.payload;
+            const { amountOfPlayersInKnockOut, groupSize } = action.payload;
+            const players = generatePlayers(action.payload.players);
+            const matches = {};
+            const groups = generateGroups(players, groupSize).map((group) => {
+                return {
+                    players: group.players,
+                    matches: group.matches.map((match) => {
+                        const matchId = ('match#' + Math.random().toString(10).substr(2, 10));
+                        matches[matchId] = match;
+                        return matchId;
+                    }),
+                }
+            });
             const tournamentId = state.activeTournamentId;
             return {
                 ...state,
@@ -50,9 +63,11 @@ export default function (state = {}, action) {
                     [tournamentId]: {
                         ...state.list[tournamentId],
                         stage: stages.groupStage,
-                        players: generatePlayers(players),
+                        players,
                         amountOfPlayersInKnockOut,
                         groupSize,
+                        groups,
+                        matches,
                     }
                 }
             };
