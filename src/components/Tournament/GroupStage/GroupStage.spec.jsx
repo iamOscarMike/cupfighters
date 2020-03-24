@@ -1,9 +1,10 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import { useSelector } from "react-redux";
 import GroupStage from './GroupStage';
 import Table from './Table/Table';
+import Match from '../../Match/Match';
 
 configure({ adapter: new Adapter() });
 jest.mock('react-redux');
@@ -21,9 +22,10 @@ describe('GroupStage', () => {
                     matches: ['match#223', 'match#224', 'match#225'],
                 },
             ]));
-        const groupStage = mount(<GroupStage />);
+        const groupStage = shallow(<GroupStage />);
         expect(groupStage.find('h3').at(0).text()).toEqual('Group a');
         expect(groupStage.find('h3').at(1).text()).toEqual('Group b');
         expect(groupStage.find(Table).length).toEqual(2);
+        expect(groupStage.find(Match).length).toEqual(6);
     });
 });

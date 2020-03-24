@@ -2,6 +2,8 @@ import {
     getTournamentList,
     getActiveTournament,
     getActiveTournamentGroups,
+    getMatch,
+    getPlayer,
 } from "./selectors";
 
 describe('getTournamentList', () => {
@@ -91,5 +93,56 @@ describe('getActiveTournamentGroups', () => {
                 },
             },
         })).toEqual([]);
+    });
+});
+
+describe('getMatch', () => {
+    it('returns the specified match', () => {
+        const activeTournamentId = 'tournament#789';
+        const match = {
+            player1: 'player#123',
+            player2: 'player#124',
+            score1: 3,
+            score2: 4,
+        };
+        const matchId = 'match#123';
+        expect(getMatch(
+            {
+                tournaments: {
+                    activeTournamentId,
+                    list: {
+                        [activeTournamentId]: {
+                            matches: {
+                                [matchId]: match,
+                            }
+                        }
+                    },
+                },
+            },
+            matchId
+        )).toEqual(match);
+    });
+});
+
+describe('getPlayer', () => {
+    it('returns the specified player', () => {
+        const activeTournamentId = 'tournament#789';
+        const players = {
+            ['player#123']: 'Kuyt',
+            ['player#124']: 'Kalou',
+        };
+        expect(getPlayer(
+            {
+                tournaments: {
+                    activeTournamentId,
+                    list: {
+                        [activeTournamentId]: {
+                            players: players
+                        }
+                    },
+                },
+            },
+            'player#124'
+        )).toEqual('Kalou');
     });
 });

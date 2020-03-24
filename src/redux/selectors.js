@@ -20,3 +20,13 @@ export const getActiveTournamentGroups = state => {
     const activeTournament = getActiveTournament(state);
     return (activeTournament && activeTournament.groups) || [];
 };
+
+export const getMatch = (state, matchId) => {
+    const activeTournament = getActiveTournament(state);
+    return activeTournament.matches[matchId];
+};
+
+export const getPlayer = (state, playerId) => {
+    const activeTournament = getActiveTournament(state);
+    return activeTournament.players[playerId];
+};
