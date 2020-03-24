@@ -4,6 +4,7 @@ import {
     UNSET_ACTIVE_TOURNAMENT,
     DELETE_TOURNAMENT,
     FINISH_SETUP,
+    UPDATE_MATCH,
 } from "./actionTypes";
 
 export const startNewTournament = title => ({
@@ -35,5 +36,14 @@ export const finishSetup = (players, amountOfPlayersInKnockOut, groupSize) => ({
         players,
         amountOfPlayersInKnockOut,
         groupSize,
+    },
+});
+
+export const updateMatch = (matchId, score1, score2) => ({
+    type: UPDATE_MATCH,
+    payload: {
+        matchId,
+        score1,
+        score2,
     },
 });

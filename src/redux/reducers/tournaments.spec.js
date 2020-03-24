@@ -5,6 +5,7 @@ import {
     UNSET_ACTIVE_TOURNAMENT,
     DELETE_TOURNAMENT,
     FINISH_SETUP,
+    UPDATE_MATCH,
 } from "../actionTypes";
 import { stages } from "../../types/stages";
 
@@ -85,7 +86,7 @@ describe('tournaments', () => {
 
         const store = tournaments(
             {
-                activeTournamentId: 'tournament#123',
+                activeTournamentId: tournamentId,
                 list: {
                     [tournamentId]: {
                         title: tournamentTitle,
@@ -113,6 +114,65 @@ describe('tournaments', () => {
         expect(store.list[tournamentId].groups[0].matches).toBeInstanceOf(Array);
         expect(store.list[tournamentId].groups[0].matches[0]).toMatch(/match#([0-9]{10})/);
         expect(store.list[tournamentId].matches).toBeInstanceOf(Object);
+        expect(store.list[otherTournamentId]).toEqual(otherTournament);
+    });
+
+    it('updates a match', () => {
+        const tournamentId = 'tournament#123';
+        const matchId = 'match#123';
+        const score1 = 6;
+        const score2 = 2;
+        const payload = { matchId, score1, score2 };
+
+        const otherTournamentId = 'tournament#456';
+        const otherTournament = {title: 'My inactive tournament'};
+        const otherMatchId = 'match#456';
+
+        const store = tournaments(
+            {
+                activeTournamentId: tournamentId,
+                list: {
+                    [tournamentId]: {
+                        title: 'My active tournament',
+                        stage: stages.groupStage,
+                        matches: {
+                            [matchId]: {
+                                player1: "player#123",
+                                player2: "player#234",
+                                score1: null,
+                                score2: null,
+                            },
+                            [otherMatchId]: {
+                                player1: "player#345",
+                                player2: "player#456",
+                                score1: null,
+                                score2: null,
+                            },
+                        },
+                    },
+                    [otherTournamentId]: otherTournament,
+                },
+            },
+            {
+                type: UPDATE_MATCH,
+                payload,
+            }
+        );
+
+        expect(store.list[tournamentId].matches[matchId]).toEqual({
+            player1: "player#123",
+            player2: "player#234",
+            score1: 6,
+            score2: 2,
+        });
+
+        expect(store.list[tournamentId].matches[otherMatchId]).toEqual({
+            player1: "player#345",
+            player2: "player#456",
+            score1: null,
+            score2: null,
+        });
+
         expect(store.list[otherTournamentId]).toEqual(otherTournament);
     });
 });

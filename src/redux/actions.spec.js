@@ -4,6 +4,7 @@ import {
     unsetActiveTournament,
     deleteTournament,
     finishSetup,
+    updateMatch,
 } from "./actions";
 import {
     START_NEW_TOURNAMENT,
@@ -11,6 +12,7 @@ import {
     UNSET_ACTIVE_TOURNAMENT,
     DELETE_TOURNAMENT,
     FINISH_SETUP,
+    UPDATE_MATCH,
 } from "./actionTypes";
 
 describe('actions', () => {
@@ -48,11 +50,18 @@ describe('actions', () => {
     });
 
     it('creates a finish setup action', () => {
-        const tournamentId = 'tournament#123';
         const players = ['Ono', 'Tomasson'];
         const amountOfPlayersInKnockOut = 2;
         const groupSize = 3;
         const expectedAction = { type: FINISH_SETUP, payload: { players, amountOfPlayersInKnockOut, groupSize } };
         expect(finishSetup(players, amountOfPlayersInKnockOut, groupSize)).toEqual(expectedAction);
+    });
+
+    it('creates an update match action', () => {
+        const matchId = 'match#123';
+        const score1 = 6;
+        const score2 = 2;
+        const expectedAction = { type: UPDATE_MATCH, payload: { matchId, score1, score2 } };
+        expect(updateMatch(matchId, score1, score2)).toEqual(expectedAction);
     });
 });

@@ -4,6 +4,7 @@ import {
     UNSET_ACTIVE_TOURNAMENT,
     DELETE_TOURNAMENT,
     FINISH_SETUP,
+    UPDATE_MATCH,
 } from "../actionTypes";
 import { stages } from "../../types/stages";
 import generatePlayers from "./tournaments/generatePlayers";
@@ -71,6 +72,27 @@ export default function (state = {}, action) {
                     }
                 }
             };
+        }
+        case UPDATE_MATCH: {
+            const tournamentId = state.activeTournamentId;
+            const matchId = action.payload.matchId;
+            return {
+                ...state,
+                list: {
+                    ...state.list,
+                    [tournamentId]: {
+                        ...state.list[tournamentId],
+                        matches: {
+                            ...state.list[tournamentId].matches,
+                            [matchId]: {
+                                ...state.list[tournamentId].matches[matchId],
+                                score1: action.payload.score1,
+                                score2: action.payload.score2,
+                            }
+                        },
+                    },
+                }
+            }
         }
         default:
             return state;
