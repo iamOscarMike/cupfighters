@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { getActiveTournamentGroups } from "../../../redux/selectors";
 import Table from "./Table/Table";
+import './GroupStage.scss';
 
 function GroupStage() {
 

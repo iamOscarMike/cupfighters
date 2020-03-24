@@ -1,0 +1,8 @@
+.GroupStage {
+    .match-container {
+        margin-top: 2rem !important;
+        div.Match:nth-child(odd) {
+            margin-top: -2rem !important;
+        }
+    }
+}
