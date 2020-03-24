@@ -59,9 +59,7 @@ describe('actions', () => {
 
     it('creates an update match action', () => {
         const matchId = 'match#123';
-        const score1 = 6;
-        const score2 = 2;
-        const expectedAction = { type: UPDATE_MATCH, payload: { matchId, score1, score2 } };
-        expect(updateMatch(matchId, score1, score2)).toEqual(expectedAction);
+        const expectedAction = { type: UPDATE_MATCH, payload: { matchId, score1: 6, score2: 2 } };
+        expect(updateMatch(matchId, '6', '2')).toEqual(expectedAction);
     });
 });

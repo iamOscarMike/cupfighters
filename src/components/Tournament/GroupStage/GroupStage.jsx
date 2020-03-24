@@ -1,13 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getActiveTournamentGroups } from "../../../redux/selectors";
+import { getActiveTournamentGroups, getMatches } from "../../../redux/selectors";
 import Table from "./Table/Table";
 import Match from "../../Match/Match";
+import createGroupsStats from "./createGroupsStats";
 import './GroupStage.scss';
 
 function GroupStage() {
 
     const groups = useSelector((state) => (getActiveTournamentGroups(state)));
+    const matches = useSelector((state) => (getMatches(state)));
+    const groupStats = createGroupsStats(groups, matches);
 
     const matchElements = () => {
         if (!groups) {
@@ -38,7 +41,7 @@ function GroupStage() {
                         {groups.map((group, index) => (
                             <div key={index} className="col-md-6">
                                 <h3>{`Group ${String.fromCharCode(97 + index)}`}</h3>
-                                <Table />
+                                <Table stats={groupStats[index]} />
                             </div>
                         ))}
                     </div>

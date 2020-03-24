@@ -5,9 +5,11 @@ import { useSelector } from "react-redux";
 import GroupStage from './GroupStage';
 import Table from './Table/Table';
 import Match from '../../Match/Match';
+import createGroupsStats from './createGroupsStats';
 
 configure({ adapter: new Adapter() });
 jest.mock('react-redux');
+jest.mock('./createGroupsStats');
 
 describe('GroupStage', () => {
     it('renders the group stage', () => {
@@ -22,6 +24,8 @@ describe('GroupStage', () => {
                     matches: ['match#223', 'match#224', 'match#225'],
                 },
             ]));
+        createGroupsStats.mockImplementation(() => ([[], []]));
+
         const groupStage = shallow(<GroupStage />);
         expect(groupStage.find('h3').at(0).text()).toEqual('Group a');
         expect(groupStage.find('h3').at(1).text()).toEqual('Group b');

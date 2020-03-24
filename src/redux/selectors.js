@@ -26,6 +26,11 @@ export const getMatch = (state, matchId) => {
     return activeTournament.matches[matchId];
 };
 
+export const getMatches = (state) => {
+    const activeTournament = getActiveTournament(state);
+    return activeTournament.matches;
+};
+
 export const getPlayer = (state, playerId) => {
     const activeTournament = getActiveTournament(state);
     return activeTournament.players[playerId];

@@ -4,6 +4,7 @@ import {
     getActiveTournamentGroups,
     getMatch,
     getPlayer,
+    getMatches,
 } from "./selectors";
 
 describe('getTournamentList', () => {
@@ -122,6 +123,35 @@ describe('getMatch', () => {
             matchId
         )).toEqual(match);
     });
+});
+
+describe('getMatchByPlayers', () => {
+    it('returns matches', () => {
+        const activeTournamentId = 'tournament#789';
+        const matches = {
+            ['match#123']: {
+                player1: 'player#123',
+                player2: 'player#124',
+                score1: 3,
+                score2: 4,
+            },
+            ['match#124']: {
+                player1: 'player#125',
+                player2: 'player#126',
+                score1: 3,
+                score2: 7,
+            },
+        }
+        const store = {
+            tournaments: {
+                activeTournamentId,
+                list: {
+                    [activeTournamentId]: { matches }
+                },
+            },
+        };
+        expect(getMatches(store)).toEqual(matches);
+    })
 });
 
 describe('getPlayer', () => {
