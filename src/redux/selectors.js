@@ -15,3 +15,8 @@ export const getActiveTournament = state => (
         && state.tournaments.list[state.tournaments.activeTournamentId]
     ) || null
 );
+
+export const getActiveTournamentGroups = state => {
+    const activeTournament = getActiveTournament(state);
+    return (activeTournament && activeTournament.groups) || [];
+};

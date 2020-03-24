@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { unsetActiveTournament } from "../../redux/actions";
 import { stages } from "../../types/stages";
 import Setup from "../../components/Tournament/Setup/Setup";
+import GroupStage from "../../components/Tournament/GroupStage/GroupStage";
 
 function Tournament({ tournament }) {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function Tournament({ tournament }) {
             </button>
 
             {tournament.stage === stages.setup && <Setup />}
+            {tournament.stage === stages.groupStage && <GroupStage />}
         </div>
     );
 };

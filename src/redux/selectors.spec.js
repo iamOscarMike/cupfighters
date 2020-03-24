@@ -1,6 +1,10 @@
-import { getTournamentList, getActiveTournament } from "./selectors";
+import {
+    getTournamentList,
+    getActiveTournament,
+    getActiveTournamentGroups,
+} from "./selectors";
 
-describe('selectors', () => {
+describe('getTournamentList', () => {
     it('returns a list of tournaments', () => {
         const tournamentKey1 = 'tournament#123';
         const tournamentTitle1 = 'My first tournament';
@@ -23,7 +27,9 @@ describe('selectors', () => {
     it('returns an empty array if there are no tournaments', () => {
         expect(getTournamentList({})).toEqual([]);
     });
+});
 
+describe('getActiveTournament', () => {
     it('returns the active tournament', () => {
         const activeTournamentId = 'tournament#789';
         const tournament = { title: 'My active tournament' };
@@ -47,4 +53,43 @@ describe('selectors', () => {
             tournaments: { ['tournament#456']: { title: 'Not the active tournament' } },
         })).toEqual(null);
     })
+});
+
+describe('getActiveTournamentGroups', () => {
+    it('returns the groups of the current active tournament', () => {
+        const activeTournamentId = 'tournament#789';
+        const groups = [
+            {
+                players: ['player#123', 'player#124', 'player#125'],
+                matches: ['match#123', 'match#124', 'match#125'],
+            },
+            {
+                players: ['player#223', 'player#224', 'player#225'],
+                matches: ['match#223', 'match#224', 'match#225'],
+            },
+        ];
+        expect(getActiveTournamentGroups({
+            tournaments: {
+                activeTournamentId,
+                list: {
+                    [activeTournamentId]: {
+                        title: 'My active tournament',
+                        groups,
+                    }
+                },
+            },
+        })).toEqual(groups);
+    });
+
+    it('returns an empty array if the active tournament has no groups', () => {
+        const activeTournamentId = 'tournament#789';
+        expect(getActiveTournamentGroups({
+            tournaments: {
+                activeTournamentId,
+                list: {
+                    [activeTournamentId]: { title: 'My active tournament' },
+                },
+            },
+        })).toEqual([]);
+    });
 });
