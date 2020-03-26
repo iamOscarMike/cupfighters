@@ -5,26 +5,35 @@ import { useSelector } from "react-redux";
 import GroupStage from './GroupStage';
 import Table from './Table/Table';
 import Match from '../../Match/Match';
-import createGroupsStats from './createGroupsStats';
+import createGroupsStats from './scripts/createGroupsStats';
+import getPlayersThroughFromStats from './scripts/getPlayersThroughFromStats';
 
 configure({ adapter: new Adapter() });
 jest.mock('react-redux');
-jest.mock('./createGroupsStats');
+jest.mock('./scripts/createGroupsStats');
+jest.mock('./scripts/getPlayersThroughFromStats');
 
 describe('GroupStage', () => {
     it('renders the group stage', () => {
         useSelector
-            .mockImplementationOnce(() => ([
-                {
-                    players: ['player#123', 'player#124', 'player#125'],
-                    matches: ['match#123', 'match#124', 'match#125'],
-                },
-                {
-                    players: ['player#223', 'player#224', 'player#225'],
-                    matches: ['match#223', 'match#224', 'match#225'],
-                },
-            ]));
+            .mockImplementationOnce(() => ({
+                amountOfPlayersInKnockOut: 4,
+                groups: [
+                    {
+                        players: ['player#123', 'player#124', 'player#125'],
+                        matches: ['match#123', 'match#124', 'match#125'],
+                    },
+                    {
+                        players: ['player#223', 'player#224', 'player#225'],
+                        matches: ['match#223', 'match#224', 'match#225'],
+                    },
+                ]
+            }));
         createGroupsStats.mockImplementation(() => ([[], []]));
+        getPlayersThroughFromStats.mockImplementation(() => ({
+            playersThrough: [],
+            playersBestThird: [],
+        }));
 
         const groupStage = shallow(<GroupStage />);
         expect(groupStage.find('h3').at(0).text()).toEqual('Group a');

@@ -1,30 +1,36 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getActiveTournamentGroups, getMatches } from "../../../redux/selectors";
+import { getActiveTournament, getMatches } from "../../../redux/selectors";
 import Table from "./Table/Table";
 import Match from "../../Match/Match";
-import createGroupsStats from "./createGroupsStats";
+import createGroupsStats from "./scripts/createGroupsStats";
+import getPlayersThroughFromStats from "./scripts/getPlayersThroughFromStats";
 import './GroupStage.scss';
 
 function GroupStage() {
 
-    const groups = useSelector((state) => (getActiveTournamentGroups(state)));
+    const tournament = useSelector((state) => (getActiveTournament(state)));
     const matches = useSelector((state) => (getMatches(state)));
-    const groupStats = createGroupsStats(groups, matches);
+    const groupStats = createGroupsStats(tournament.groups, matches);
+    const { playersThrough, playersBestThird } = getPlayersThroughFromStats(
+        groupStats,
+        Math.floor(parseInt(tournament.amountOfPlayersInKnockOut) / tournament.groups.length),
+        Math.floor(parseInt(tournament.amountOfPlayersInKnockOut) % tournament.groups.length),
+    );
 
     const matchElements = () => {
-        if (!groups) {
+        if (!tournament.groups) {
             return [];
         }
-        const numberOfGroups = groups.length;
-        const numberOfMatchersPerGroup = groups[0].matches.length;
+        const numberOfGroups = tournament.groups.length;
+        const numberOfMatchersPerGroup = tournament.groups[0].matches.length;
 
         let elements = []; let i; let j;
         for (i = 0; i < numberOfMatchersPerGroup; i++) {
             for (j = 0; j < numberOfGroups; j++) {
                 elements.push(<Match
                     key={`${j}-${i}`}
-                    matchId={groups[j].matches[i]}
+                    matchId={tournament.groups[j].matches[i]}
                     matchIndicator={String.fromCharCode(97 + j) + (i + 1)}
                 />);
             }
@@ -38,10 +44,14 @@ function GroupStage() {
                 <div className="col-sm-12 col-md-10 offset-md-1">
 
                     <div className="row">
-                        {groups.map((group, index) => (
+                        {tournament.groups.map((group, index) => (
                             <div key={index} className="col-md-6">
                                 <h3>{`Group ${String.fromCharCode(97 + index)}`}</h3>
-                                <Table stats={groupStats[index]} />
+                                <Table
+                                    stats={groupStats[index]}
+                                    playersThrough={playersThrough}
+                                    playersBestThird={playersBestThird}
+                                />
                             </div>
                         ))}
                     </div>
