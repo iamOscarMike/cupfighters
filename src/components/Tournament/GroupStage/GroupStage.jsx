@@ -17,6 +17,7 @@ function GroupStage() {
         Math.floor(parseInt(tournament.amountOfPlayersInKnockOut) % tournament.groups.length),
         matches,
     );
+    const allowNextStage = Object.values(matches).filter((match) => (!Number.isInteger(match.score1) || !Number.isInteger(match.score2))).length === 0;
 
     const matchElements = () => {
         if (!tournament.groups) {
@@ -65,6 +66,16 @@ function GroupStage() {
                         </div>
                     </div>
 
+                    <div className="row">
+                            <button
+                                type="button"
+                                className={'btn btn-outline-primary btn-lg m-auto' + (allowNextStage ? '' : ' disabled')}
+                                disabled={!allowNextStage}
+                                onClick={() => {}}
+                            >
+                                Finish Group Stage
+                            </button>
+                        </div>
                 </div>
             </div>
         </div>

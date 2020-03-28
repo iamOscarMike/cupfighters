@@ -49,7 +49,7 @@ function createGroupsStats(groups, matches) {
 
         group.matches.forEach((matchId) => {
             const match = matches[matchId];
-            if (match.score1 !== null && match.score2 !== null) {
+            if (Number.isInteger(match.score1) && Number.isInteger(match.score2)) {
                 players[match.player1].played++;
                 players[match.player2].played++;
                 if (match.score1 > match.score2) {
