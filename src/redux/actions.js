@@ -5,6 +5,7 @@ import {
     DELETE_TOURNAMENT,
     FINISH_SETUP,
     UPDATE_MATCH,
+    FINISH_GROUP_STAGE,
 } from "./actionTypes";
 
 export const startNewTournament = title => ({
@@ -46,4 +47,9 @@ export const updateMatch = (matchId, score1, score2) => ({
         score1: score1 !== null ? parseInt(score1) : null,
         score2: score2 !== null ? parseInt(score2) : null,
     },
+});
+
+export const finishGroupStage = () => ({
+    type: FINISH_GROUP_STAGE,
+    payload: {},
 });

@@ -3,8 +3,10 @@ import { useSelector } from "react-redux";
 import { getActiveTournament, getMatches } from "../../../redux/selectors";
 import Table from "./Table/Table";
 import Match from "../../Match/Match";
-import {createGroupsStats, getPlayersThroughFromStats} from "./scripts/stats";
+import { createGroupsStats, getPlayersThroughFromStats } from "./scripts/stats";
 import './GroupStage.scss';
+import { finishGroupStage } from "../../../redux/actions";
+import { useDispatch } from "react-redux";
 
 function GroupStage() {
 
@@ -18,6 +20,7 @@ function GroupStage() {
         matches,
     );
     const allowNextStage = Object.values(matches).filter((match) => (!Number.isInteger(match.score1) || !Number.isInteger(match.score2))).length === 0;
+    const dispatch = useDispatch();
 
     const matchElements = () => {
         if (!tournament.groups) {
@@ -67,15 +70,15 @@ function GroupStage() {
                     </div>
 
                     <div className="row">
-                            <button
-                                type="button"
-                                className={'btn btn-outline-primary btn-lg m-auto' + (allowNextStage ? '' : ' disabled')}
-                                disabled={!allowNextStage}
-                                onClick={() => {}}
-                            >
-                                Finish Group Stage
+                        <button
+                            type="button"
+                            className={'btn btn-outline-primary btn-lg m-auto' + (allowNextStage ? '' : ' disabled')}
+                            disabled={!allowNextStage}
+                            onClick={() => { dispatch(finishGroupStage()) }}
+                        >
+                            Finish Group Stage
                             </button>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

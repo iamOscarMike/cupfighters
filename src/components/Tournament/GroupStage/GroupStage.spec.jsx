@@ -1,11 +1,12 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import GroupStage from './GroupStage';
 import Table from './Table/Table';
 import Match from '../../Match/Match';
 import { createGroupsStats, getPlayersThroughFromStats } from './scripts/stats';
+import { FINISH_GROUP_STAGE } from '../../../redux/actionTypes';
 
 configure({ adapter: new Adapter() });
 jest.mock('react-redux');
@@ -56,8 +57,16 @@ describe('GroupStage', () => {
         useSelector
             .mockImplementationOnce(() => (tournament))
             .mockImplementationOnce(() => ({ ['match#1']: { score1: 1, score2: 1 } }));
+        const dispatch = jest.fn(() => { });
+        useDispatch.mockImplementation(() => dispatch);
 
         const groupStage = shallow(<GroupStage />);
         expect(groupStage.find('button.btn-outline-primary.btn-lg').props().disabled).toEqual(false);
+
+        groupStage.find('button.btn-outline-primary.btn-lg').simulate('click');
+        expect(dispatch).toHaveBeenCalledWith({
+            type: FINISH_GROUP_STAGE,
+            payload: {},
+        });
     });
 });

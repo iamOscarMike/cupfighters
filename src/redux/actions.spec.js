@@ -5,6 +5,7 @@ import {
     deleteTournament,
     finishSetup,
     updateMatch,
+    finishGroupStage,
 } from "./actions";
 import {
     START_NEW_TOURNAMENT,
@@ -13,6 +14,7 @@ import {
     DELETE_TOURNAMENT,
     FINISH_SETUP,
     UPDATE_MATCH,
+    FINISH_GROUP_STAGE,
 } from "./actionTypes";
 
 describe('actions', () => {
@@ -61,5 +63,10 @@ describe('actions', () => {
         const matchId = 'match#123';
         const expectedAction = { type: UPDATE_MATCH, payload: { matchId, score1: 6, score2: 2 } };
         expect(updateMatch(matchId, '6', '2')).toEqual(expectedAction);
+    });
+
+    it('creates a finish group stage action', () => {
+        const expectedAction = { type: FINISH_GROUP_STAGE, payload: {} };
+        expect(finishGroupStage()).toEqual(expectedAction);
     });
 });
