@@ -1,13 +1,36 @@
 import { find } from 'lodash';
 
-const getMatchByPlayers = (matches, player1, player2) => {
+function getMatchByPlayers(matches, player1, player2) {
     return find(matches, (match) => {
         return (match.player1 == player1 && match.player2 == player2)
             || (match.player1 == player2 && match.player2 == player1)
     });
 }
 
-export default function createGroupsStats(groups, matches) {
+function sortStats(stats, matches) {
+    return Object.values(stats).sort((player1, player2) => {
+        if (player1.points !== player2.points) {
+            return (player1.points - player2.points) * -1;
+        }
+        if (player1.goalDifference !== player2.goalDifference) {
+            return (player1.goalDifference - player2.goalDifference) * -1;
+        }
+        if (player1.goalsFor !== player2.goalsFor) {
+            return (player1.goalsFor - player2.goalsFor) * -1;
+        }
+        const match = getMatchByPlayers(matches, player1.player, player2.player);
+        if (match && Number.isInteger(match.score1) && Number.isInteger(match.score2)) {
+            if (player1.player === match.player1) {
+                return (match.score1 - match.score2) * -1;
+            } else {
+                return (match.score2 - match.score1) * -1;
+            }
+        }
+        return 0;
+    });
+}
+
+function createGroupsStats(groups, matches) {
     return groups.map((group) => {
         let players = {};
         group.players.forEach((player) => {
@@ -52,25 +75,31 @@ export default function createGroupsStats(groups, matches) {
             }
         });
 
-        return Object.values(players).sort((player1, player2) => {
-            if (player1.points !== player2.points) {
-                return (player1.points - player2.points) * -1;
-            }
-            if (player1.goalDifference !== player2.goalDifference) {
-                return (player1.goalDifference - player2.goalDifference) * -1;
-            }
-            if (player1.goalsFor !== player2.goalsFor) {
-                return (player1.goalsFor - player2.goalsFor) * -1;
-            }
-            const match = getMatchByPlayers(matches, player1.player, player2.player);
-            if (match && Number.isInteger(match.score1) && Number.isInteger(match.score2)) {
-                if (player1.player === match.player1) {
-                    return (match.score1 - match.score2) * -1;
-                } else {
-                    return (match.score2 - match.score1) * -1;
-                }
-            }
-            return 0;
-        });
+        return sortStats(players, matches);
     });
 }
+
+function getPlayersThroughFromStats(stats, numberThroughPerGroup, numberBestThird, matches) {
+
+    const playersThrough = new Array;
+    stats.forEach((group) => {
+        group.slice(0, numberThroughPerGroup).forEach((player) => {
+            playersThrough.push(player.player);
+        });
+    });
+
+    const playersBestThird = new Array;
+    sortStats(
+        Object.values(stats.map((group) => (group.slice(numberThroughPerGroup, numberThroughPerGroup + 1)[0]))),
+        matches
+    ).slice(0, numberBestThird).forEach((player) => {
+        playersBestThird.push(player.player);
+    });
+
+    return {
+        playersThrough,
+        playersBestThird,
+    }
+}
+
+export { createGroupsStats, getPlayersThroughFromStats };

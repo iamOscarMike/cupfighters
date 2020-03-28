@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import { getActiveTournament, getMatches } from "../../../redux/selectors";
 import Table from "./Table/Table";
 import Match from "../../Match/Match";
-import createGroupsStats from "./scripts/createGroupsStats";
-import getPlayersThroughFromStats from "./scripts/getPlayersThroughFromStats";
+import {createGroupsStats, getPlayersThroughFromStats} from "./scripts/stats";
 import './GroupStage.scss';
 
 function GroupStage() {
@@ -16,6 +15,7 @@ function GroupStage() {
         groupStats,
         Math.floor(parseInt(tournament.amountOfPlayersInKnockOut) / tournament.groups.length),
         Math.floor(parseInt(tournament.amountOfPlayersInKnockOut) % tournament.groups.length),
+        matches,
     );
 
     const matchElements = () => {

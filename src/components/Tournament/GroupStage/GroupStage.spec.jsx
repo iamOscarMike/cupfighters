@@ -5,13 +5,11 @@ import { useSelector } from "react-redux";
 import GroupStage from './GroupStage';
 import Table from './Table/Table';
 import Match from '../../Match/Match';
-import createGroupsStats from './scripts/createGroupsStats';
-import getPlayersThroughFromStats from './scripts/getPlayersThroughFromStats';
+import { createGroupsStats, getPlayersThroughFromStats } from './scripts/stats';
 
 configure({ adapter: new Adapter() });
 jest.mock('react-redux');
-jest.mock('./scripts/createGroupsStats');
-jest.mock('./scripts/getPlayersThroughFromStats');
+jest.mock('./scripts/stats');
 
 describe('GroupStage', () => {
     it('renders the group stage', () => {
