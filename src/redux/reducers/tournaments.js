@@ -5,10 +5,16 @@ import {
     DELETE_TOURNAMENT,
     FINISH_SETUP,
     UPDATE_MATCH,
+    FINISH_GROUP_STAGE,
 } from "../actionTypes";
 import { stages } from "../../types/stages";
 import generatePlayers from "./tournaments/generatePlayers";
 import generateGroups from "./tournaments/generateGroups";
+import generateKnockoutMatches from "./tournaments/generateKnockoutMatches";
+
+function generateMatchId() {
+    return 'match#' + Math.random().toString(10).substr(2, 10);
+};
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -50,7 +56,7 @@ export default function (state = {}, action) {
                 return {
                     players: group.players,
                     matches: group.matches.map((match) => {
-                        const matchId = ('match#' + Math.random().toString(10).substr(2, 10));
+                        const matchId = generateMatchId();
                         matches[matchId] = match;
                         return matchId;
                     }),
@@ -90,6 +96,29 @@ export default function (state = {}, action) {
                                 score2: action.payload.score2,
                             }
                         },
+                    },
+                }
+            }
+        }
+        case FINISH_GROUP_STAGE: {
+            const tournamentId = state.activeTournamentId;
+            const matches = {};
+            generateKnockoutMatches(state.list[tournamentId]).forEach((match) => {
+                matches[generateMatchId()] = match;
+            });
+
+            return {
+                ...state,
+                list: {
+                    ...state.list,
+                    [tournamentId]: {
+                        ...state.list[tournamentId],
+                        stage: stages.knockoutStage,
+                        matches: {
+                            ...state.list[tournamentId].matches,
+                            ...matches,
+                        },
+                        knockoutRounds: [{ matches: Object.keys(matches) }],
                     },
                 }
             }

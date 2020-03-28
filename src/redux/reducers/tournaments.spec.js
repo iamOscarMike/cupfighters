@@ -6,8 +6,12 @@ import {
     DELETE_TOURNAMENT,
     FINISH_SETUP,
     UPDATE_MATCH,
+    FINISH_GROUP_STAGE,
 } from "../actionTypes";
 import { stages } from "../../types/stages";
+import generateKnockoutMatches from "./tournaments/generateKnockoutMatches";
+
+jest.mock("./tournaments/generateKnockoutMatches");
 
 describe('tournaments', () => {
     it('adds a new started tournament to the store', () => {
@@ -125,7 +129,7 @@ describe('tournaments', () => {
         const payload = { matchId, score1, score2 };
 
         const otherTournamentId = 'tournament#456';
-        const otherTournament = {title: 'My inactive tournament'};
+        const otherTournament = { title: 'My inactive tournament' };
         const otherMatchId = 'match#456';
 
         const store = tournaments(
@@ -174,5 +178,38 @@ describe('tournaments', () => {
         });
 
         expect(store.list[otherTournamentId]).toEqual(otherTournament);
+    });
+
+    it('finishes the group stage', () => {
+        const tournamentId = 'tournament#123';
+        const matches = [
+            { player1: 'player#1', player2: 'player#2', score1: null, score2: null },
+            { player1: 'player#3', player2: 'player#4', score1: null, score2: null },
+        ];
+        generateKnockoutMatches.mockImplementation(() => (matches));
+        const store = tournaments(
+            {
+                activeTournamentId: tournamentId,
+                list: {
+                    [tournamentId]: {
+                        title: 'My active tournament',
+                        stage: stages.groupStage,
+                        amountOfPlayersInKnockOut: 8,
+                        matches: {},
+                    },
+                },
+            },
+            {
+                type: FINISH_GROUP_STAGE,
+                payload: {},
+            }
+        );
+        expect(store.list[tournamentId].stage).toEqual(stages.knockoutStage);
+        expect(Object.values(store.list[tournamentId].matches)[0]).toEqual(matches[0]);
+        expect(Object.values(store.list[tournamentId].matches)[1]).toEqual(matches[1]);
+        
+        const matchIds = Object.keys(store.list[tournamentId].matches);
+        expect(store.list[tournamentId].knockoutRounds[0].matches).toContain(matchIds[0]);
+        expect(store.list[tournamentId].knockoutRounds[0].matches).toContain(matchIds[1]);
     });
 });
