@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-function SelectPlayersInKnockout({ players, setamountOfPlayersInKnockOut }) {
+function SelectPlayersInKnockout({ players, setamountOfPlayersInKnockout }) {
     const getOptions = () => {
         const amountsOfPlayers = ([2, 4, 8]).filter((amount) => (amount < players.length));
         const options = amountsOfPlayers.map((amount) => (
@@ -16,9 +16,9 @@ function SelectPlayersInKnockout({ players, setamountOfPlayersInKnockOut }) {
         <div className="SelectPlayersInKnockout row">
             <div className="col-sm-12 col-md-6 offset-md-3">
                 <div className="form-group row">
-                    <label htmlFor="knockOut" className="col-sm-3 col-form-label">Amount in knock out</label>
+                    <label htmlFor="knockout" className="col-sm-3 col-form-label">Amount in knock out</label>
                     <div className="col-sm-9">
-                        <select id="knockOut" className="form-control" onChange={(event) => { setamountOfPlayersInKnockOut(event.target.value) }}>
+                        <select id="knockout" className="form-control" onChange={(event) => { setamountOfPlayersInKnockout(event.target.value) }}>
                             <option value={null}></option>
                             {getOptions()}
                         </select>
@@ -31,7 +31,7 @@ function SelectPlayersInKnockout({ players, setamountOfPlayersInKnockOut }) {
 
 SelectPlayersInKnockout.propTypes = {
     players: PropTypes.array.isRequired,
-    setamountOfPlayersInKnockOut: PropTypes.func.isRequired,
+    setamountOfPlayersInKnockout: PropTypes.func.isRequired,
 };
 
 export default SelectPlayersInKnockout;

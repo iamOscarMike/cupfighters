@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 function Setup() {
     const [players, setPlayers] = useState([]);
     const [input, setInput] = useState('');
-    const [amountOfPlayersInKnockOut, setamountOfPlayersInKnockOut] = useState(null);
+    const [amountOfPlayersInKnockout, setamountOfPlayersInKnockout] = useState(null);
     const [groupSize, setGroupSize] = useState(null);
     const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ function Setup() {
         deletePlayer(player);
         setInput(player);
     };
-    const allowNextStage = () => (players && groupSize && amountOfPlayersInKnockOut);
+    const allowNextStage = () => (players && groupSize && amountOfPlayersInKnockout);
 
     return (
         <div className="Setup">
@@ -39,7 +39,7 @@ function Setup() {
             />
             <SelectPlayersInKnockout
                 players={players}
-                setamountOfPlayersInKnockOut={setamountOfPlayersInKnockOut}
+                setamountOfPlayersInKnockout={setamountOfPlayersInKnockout}
             />
             <SelectGroupSize
                 players={players}
@@ -57,7 +57,7 @@ function Setup() {
                     className={'btn btn-outline-primary btn-lg m-auto' + (allowNextStage() ? '' : ' disabled')}
                     disabled={!allowNextStage()}
                     onClick={() => {
-                        dispatch(finishSetup(players, parseInt(amountOfPlayersInKnockOut), parseInt(groupSize)))
+                        dispatch(finishSetup(players, parseInt(amountOfPlayersInKnockout), parseInt(groupSize)))
                     }}
                 >
                     Continue

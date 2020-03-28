@@ -81,9 +81,9 @@ describe('tournaments', () => {
         const tournamentId = 'tournament#123';
         const tournamentTitle = 'My activeTournament';
         const players = ['Ono', 'Tomasson', 'van Hooijdonk', 'van Persie', 'Pauwe', 'Leonardo'];
-        const amountOfPlayersInKnockOut = 4;
+        const amountOfPlayersInKnockout = 4;
         const groupSize = 3;
-        const payload = { tournamentId, players, amountOfPlayersInKnockOut, groupSize };
+        const payload = { tournamentId, players, amountOfPlayersInKnockout, groupSize };
 
         const otherTournamentId = 'tournament#456';
         const otherTournament = { title: 'My inactive tournament' };
@@ -110,7 +110,7 @@ describe('tournaments', () => {
         expect(store.list[tournamentId].title).toEqual(tournamentTitle);
         expect(store.list[tournamentId].stage).toEqual(stages.groupStage);
         expect(store.list[tournamentId].players).toBeInstanceOf(Object);
-        expect(store.list[tournamentId].amountOfPlayersInKnockOut).toEqual(amountOfPlayersInKnockOut);
+        expect(store.list[tournamentId].amountOfPlayersInKnockout).toEqual(amountOfPlayersInKnockout);
         expect(store.list[tournamentId].groupSize).toEqual(groupSize);
         expect(store.list[tournamentId].groups).toBeInstanceOf(Array);
         expect(store.list[tournamentId].groups[0]).toBeInstanceOf(Object);
@@ -194,7 +194,7 @@ describe('tournaments', () => {
                     [tournamentId]: {
                         title: 'My active tournament',
                         stage: stages.groupStage,
-                        amountOfPlayersInKnockOut: 8,
+                        amountOfPlayersInKnockout: 8,
                         matches: {},
                     },
                 },

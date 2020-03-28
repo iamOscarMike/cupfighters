@@ -49,7 +49,7 @@ export default function (state = {}, action) {
             return state;
         }
         case FINISH_SETUP: {
-            const { amountOfPlayersInKnockOut, groupSize } = action.payload;
+            const { amountOfPlayersInKnockout, groupSize } = action.payload;
             const players = generatePlayers(action.payload.players);
             const matches = {};
             const groups = generateGroups(players, groupSize).map((group) => {
@@ -71,7 +71,7 @@ export default function (state = {}, action) {
                         ...state.list[tournamentId],
                         stage: stages.groupStage,
                         players,
-                        amountOfPlayersInKnockOut,
+                        amountOfPlayersInKnockout,
                         groupSize,
                         groups,
                         matches,

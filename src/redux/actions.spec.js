@@ -53,10 +53,10 @@ describe('actions', () => {
 
     it('creates a finish setup action', () => {
         const players = ['Ono', 'Tomasson'];
-        const amountOfPlayersInKnockOut = 2;
+        const amountOfPlayersInKnockout = 2;
         const groupSize = 3;
-        const expectedAction = { type: FINISH_SETUP, payload: { players, amountOfPlayersInKnockOut, groupSize } };
-        expect(finishSetup(players, amountOfPlayersInKnockOut, groupSize)).toEqual(expectedAction);
+        const expectedAction = { type: FINISH_SETUP, payload: { players, amountOfPlayersInKnockout, groupSize } };
+        expect(finishSetup(players, amountOfPlayersInKnockout, groupSize)).toEqual(expectedAction);
     });
 
     it('creates an update match action', () => {

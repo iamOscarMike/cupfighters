@@ -2,7 +2,7 @@ const stages = Object.freeze({
     start: 'start',
     setup: 'setup',
     groupStage: 'groupStage',
-    knockoutStage: 'knockOutStage',
+    knockoutStage: 'knockoutStage',
     finished: 'finished',
 });
 

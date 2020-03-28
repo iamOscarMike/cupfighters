@@ -114,7 +114,7 @@ describe('Setup', () => {
                     'Kiprich',
                     'van Gastel',
                 ],
-                amountOfPlayersInKnockOut: 2,
+                amountOfPlayersInKnockout: 2,
                 groupSize: 2,
             }
         });

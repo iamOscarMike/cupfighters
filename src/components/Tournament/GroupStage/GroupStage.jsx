@@ -15,8 +15,8 @@ function GroupStage() {
     const groupStats = createGroupsStats(tournament.groups, matches);
     const { playersThrough, playersBestThird } = getPlayersThroughFromStats(
         groupStats,
-        Math.floor(parseInt(tournament.amountOfPlayersInKnockOut) / tournament.groups.length),
-        Math.floor(parseInt(tournament.amountOfPlayersInKnockOut) % tournament.groups.length),
+        Math.floor(parseInt(tournament.amountOfPlayersInKnockout) / tournament.groups.length),
+        Math.floor(parseInt(tournament.amountOfPlayersInKnockout) % tournament.groups.length),
         matches,
     );
     const allowNextStage = Object.values(matches).filter((match) => (!Number.isInteger(match.score1) || !Number.isInteger(match.score2))).length === 0;

@@ -31,11 +31,11 @@ export const deleteTournament = tournamentId => ({
     },
 });
 
-export const finishSetup = (players, amountOfPlayersInKnockOut, groupSize) => ({
+export const finishSetup = (players, amountOfPlayersInKnockout, groupSize) => ({
     type: FINISH_SETUP,
     payload: {
         players,
-        amountOfPlayersInKnockOut,
+        amountOfPlayersInKnockout,
         groupSize,
     },
 });

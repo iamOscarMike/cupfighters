@@ -2,15 +2,15 @@ import { createGroupsStats, getPlayersThroughFromStats } from "../../../componen
 
 export default function generateKnockoutMatches(tournament) {
     const stats = createGroupsStats(tournament.groups, tournament.matches);
-    const numberOfPlayersThroughPerGroup = Math.floor(parseInt(tournament.amountOfPlayersInKnockOut) / tournament.groups.length);
-    const numberOfPlayersBestThird = Math.floor(parseInt(tournament.amountOfPlayersInKnockOut) % tournament.groups.length);
+    const numberOfPlayersThroughPerGroup = Math.floor(parseInt(tournament.amountOfPlayersInKnockout) / tournament.groups.length);
+    const numberOfPlayersBestThird = Math.floor(parseInt(tournament.amountOfPlayersInKnockout) % tournament.groups.length);
     let playersInKnockout = [];
     for (let i = 0; i < numberOfPlayersThroughPerGroup; i++) {
         stats.forEach((group) => { playersInKnockout.push(group[i].player) });
     }
     const { playersBestThird } = getPlayersThroughFromStats(stats, numberOfPlayersThroughPerGroup, numberOfPlayersBestThird, tournament.matches);
 
-    const indexBestOfTheRest = tournament.amountOfPlayersInKnockOut / 2;
+    const indexBestOfTheRest = tournament.amountOfPlayersInKnockout / 2;
     const homePlayers = playersInKnockout.slice(0, indexBestOfTheRest);
     const awayPlayers = playersBestThird.concat(playersInKnockout.slice(indexBestOfTheRest));
 

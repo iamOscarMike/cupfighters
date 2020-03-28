@@ -6,7 +6,7 @@ describe('generateKnockoutMatches', () => {
         const matches = generateKnockoutMatches({
             title: 'My active tournament',
             stage: stages.groupStage,
-            amountOfPlayersInKnockOut: 8,
+            amountOfPlayersInKnockout: 8,
             groups: [
                 { players: ['player#1', 'player#2', 'player#3'], matches: ['match#1', 'match#2', 'match#3'] },
                 { players: ['player#4', 'player#5', 'player#6'], matches: ['match#4', 'match#5', 'match#6'] },

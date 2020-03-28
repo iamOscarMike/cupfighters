@@ -14,7 +14,7 @@ jest.mock('./scripts/stats');
 
 describe('GroupStage', () => {
     const tournament = {
-        amountOfPlayersInKnockOut: 4,
+        amountOfPlayersInKnockout: 4,
         groups: [
             {
                 players: ['player#123', 'player#124', 'player#125'],
