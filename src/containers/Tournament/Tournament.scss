@@ -1,3 +1,7 @@
+$tabs-border: #222A4C;
+$primary: #85ffc7;
+$tertiary: #fdca40;
+
 .Tournament {
     .logo-container {
         margin-top: 2rem;
@@ -14,11 +18,49 @@
     }
 
     .header-container {
-        margin-top: 4rem;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
     }
 
     button.back {
         position: absolute;
         top: 3.5rem;
+    }
+
+    ul.nav-tabs {
+        border-top: 10px solid $tabs-border;
+        border-bottom: none;
+        margin-bottom: 3rem;
+
+        .nav-item.col-4 {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        .nav-link {
+            border: none;
+            font-family: 'Montserrat';
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+        }
+
+        .nav-link.active,
+        .nav-item.show .nav-link,
+        .nav-link:focus {
+            background-color: $tabs-border;
+            border: none;
+            color: $primary;
+        }
+
+        .nav-link:hover {
+            background-color: $tabs-border;
+            border: none;
+            color: $tertiary;
+        }
+
+        .nav-link.disabled {
+            color: #636a88;
+        }
     }
 }

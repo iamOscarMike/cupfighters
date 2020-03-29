@@ -14,9 +14,13 @@ const stageOrder = [
     stages.finished,
 ]
 
-const fetchNextStage = (currentStage) => {
+function fetchNextStage(currentStage) {
     const i = stageOrder.indexOf(currentStage);
     return stageOrder[i + 1] != null && stageOrder[i + 1];
 }
 
-export { stages, fetchNextStage };
+function canSeeStage(stage, currentStage) {
+    return stageOrder.indexOf(currentStage) >= stageOrder.indexOf(stage);
+}
+
+export { stages, fetchNextStage, canSeeStage };

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import 'bootstrap/js/dist/tab';
 
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
