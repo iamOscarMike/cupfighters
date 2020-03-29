@@ -7,6 +7,7 @@ import { UNSET_ACTIVE_TOURNAMENT } from '../../redux/actionTypes';
 import { stages } from '../../types/stages';
 import Setup from '../../components/Tournament/Setup/Setup';
 import GroupStage from '../../components/Tournament/GroupStage/GroupStage';
+import KnockoutStage from '../../components/Tournament/KnockoutStage/KnockoutStage';
 
 configure({ adapter: new Adapter() });
 
@@ -38,12 +39,28 @@ describe('Tournament', () => {
     it('renders the groupStage component when stage is group stage', () => {
         const tournament = shallow(<Tournament tournament={{ title: 'T2', stage: stages.groupStage }} />);
         expect(tournament.find(GroupStage).length).toEqual(1);
+        expect(tournament.find(KnockoutStage).length).toEqual(0);
 
         expect(tournament.find('a[href="#group"]').props().className).toContain('active');
         expect(tournament.find('a[href="#group"]').props().className).not.toContain('disabled');
 
         expect(tournament.find('a[href="#knockout"]').props().className).not.toContain('active');
         expect(tournament.find('a[href="#knockout"]').props().className).toContain('disabled');
+
+        expect(tournament.find('a[href="#finished"]').props().className).not.toContain('active');
+        expect(tournament.find('a[href="#finished"]').props().className).toContain('disabled');
+    });
+
+    it('renders the knockoutStage component when stage is knockout stage', () => {
+        const tournament = shallow(<Tournament tournament={{ title: 'T2', stage: stages.knockoutStage }} />);
+        expect(tournament.find(GroupStage).length).toEqual(1);
+        expect(tournament.find(KnockoutStage).length).toEqual(1);
+
+        expect(tournament.find('a[href="#group"]').props().className).not.toContain('active');
+        expect(tournament.find('a[href="#group"]').props().className).not.toContain('disabled');
+
+        expect(tournament.find('a[href="#knockout"]').props().className).toContain('active');
+        expect(tournament.find('a[href="#knockout"]').props().className).not.toContain('disabled');
 
         expect(tournament.find('a[href="#finished"]').props().className).not.toContain('active');
         expect(tournament.find('a[href="#finished"]').props().className).toContain('disabled');

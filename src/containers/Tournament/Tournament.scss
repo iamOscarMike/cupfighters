@@ -1,5 +1,7 @@
-$tabs-border: #222A4C;
+$background: #29335c;
+$background-darker: #222A4C;
 $primary: #85ffc7;
+$secondary: #636a88;
 $tertiary: #fdca40;
 
 .Tournament {
@@ -28,7 +30,7 @@ $tertiary: #fdca40;
     }
 
     ul.nav-tabs {
-        border-top: 10px solid $tabs-border;
+        border-top: 10px solid $background-darker;
         border-bottom: none;
         margin-bottom: 3rem;
 
@@ -43,24 +45,25 @@ $tertiary: #fdca40;
             font-weight: 900;
             text-transform: uppercase;
             padding: 1rem 2rem;
+            background-color: $background-darker;
         }
 
         .nav-link.active,
         .nav-item.show .nav-link,
         .nav-link:focus {
-            background-color: $tabs-border;
+            background-color: $background;
             border: none;
             color: $primary;
         }
 
         .nav-link:hover {
-            background-color: $tabs-border;
+            background-color: $background;
             border: none;
             color: $tertiary;
         }
 
         .nav-link.disabled {
-            color: #636a88;
+            color: $secondary;
         }
     }
 }

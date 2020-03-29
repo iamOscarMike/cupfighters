@@ -8,6 +8,7 @@ import { unsetActiveTournament } from "../../redux/actions";
 import { stages, canSeeStage } from "../../types/stages";
 import Setup from "../../components/Tournament/Setup/Setup";
 import GroupStage from "../../components/Tournament/GroupStage/GroupStage";
+import KnockoutStage from "../../components/Tournament/KnockoutStage/KnockoutStage";
 
 function Tournament({ tournament }) {
     const dispatch = useDispatch();
@@ -97,7 +98,7 @@ function Tournament({ tournament }) {
                             id="knockout"
                             role="tabpanel"
                         >
-                            Knock-out stage todo
+                            {canSeeKnockoutStage && <KnockoutStage />}
                         </div>
                         <div
                             className={'tab-pane fade' + (isInFinished ? ' show active' : '')}
