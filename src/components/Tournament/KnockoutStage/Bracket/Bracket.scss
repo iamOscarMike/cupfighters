@@ -1,0 +1,204 @@
+$primary: #85ffc7;
+
+.Bracket {
+    .round-title {
+        text-align: center;
+        font-family: 'Montserrat';
+        font-weight: 900;
+        text-transform: uppercase;
+    }
+
+    .background-dark {
+        background-color: #222A4C;
+    }
+
+    .match {
+        .player {
+            padding-top: 7px;
+            font-weight: 700;
+        }
+
+        input {
+            display: inline;
+            width: 3em;
+            text-align: center;
+
+            &:disabled {
+                border: none;
+            }
+        }
+    }
+
+    .penalties {
+        background-color: $primary;
+        border-radius: 50% !important;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        position: absolute;
+        text-align: center;
+
+        svg {
+            height: 32px !important;
+        }
+    }
+
+    .left {
+        .match {
+            text-align: right;
+        }
+
+        .match::after {
+            position: absolute;
+            content: "";
+            width: 15px;
+            height: 90px;
+            margin-top: -138px;
+            border-top: solid 5px $primary;
+            border-bottom: solid 5px $primary;
+            border-right: solid 5px $primary;
+        }
+
+        .player {
+            float: left;
+        }
+
+        .penalties {
+            right: 15px;
+            margin-top: -54px;
+        }
+    }
+
+    .right {
+        .match {
+            text-align: left;
+        }
+
+        .match::before {
+            position: absolute;
+            content: "";
+            width: 15px;
+            height: 90px;
+            margin-top: 34px;
+            margin-left: -15px;
+            border-top: solid 5px $primary;
+            border-bottom: solid 5px $primary;
+            border-left: solid 5px $primary;
+        }
+
+        .player {
+            float: right;
+        }
+
+        .penalties {
+            left: 15px;
+            margin-top: -54px;
+        }
+    }
+
+    .round-of-2 {
+        .match {
+            margin-top: 145px;
+        }
+
+        &:not(:first-child) {
+            .match::before {
+                position: absolute;
+                content: "";
+                width: 15px;
+                margin-top: 33px;
+                margin-left: -15px;
+                border-top: solid 5px $primary;
+            }
+
+            .match::after {
+                position: absolute;
+                content: "";
+                width: 15px;
+                margin-top: -53px;
+                right: 0;
+                border-top: solid 5px $primary;
+            }
+        }
+
+        .row {
+            margin-right: 0px;
+            margin-left: 0px;
+
+            .player-1 {
+                text-align: right;
+
+                .penalties {
+                    right: 3rem;
+                    top: -16px;
+                }
+
+                .player {
+                    float: left;
+                }
+            }
+
+            .player-2 {
+                text-align: left;
+
+                .penalties {
+                    left: 3rem;
+                    top: -16px;
+                }
+
+                .player {
+                    float: right;
+                }
+            }
+        }
+    }
+
+    .round-of-4 {
+        .match {
+            margin-top: 60px;
+        }
+
+        .mb-3 {
+            margin-bottom: 100px !important;
+        }
+
+        &.left {
+            .match::after {
+                height: 175px;
+                margin-top: -307px;
+            }
+        }
+
+        &.right {
+            .match::before {
+                height: 175px;
+            }
+        }
+
+        &.left:not(:first-child) {
+            .match::before {
+                position: absolute;
+                content: "";
+                width: 15px;
+                margin-top: 33px;
+                left: 0;
+                border-top: solid 5px $primary;
+                border-bottom: solid 5px $primary;
+                height: 175px;
+            }
+        }
+
+        &.right:not(:last-child) {
+            .match::after {
+                position: absolute;
+                content: "";
+                width: 15px;
+                margin-top: -307px;
+                right: 0;
+                border-top: solid 5px $primary;
+                border-bottom: solid 5px $primary;
+                height: 175px;
+            }
+        }
+    }
+}

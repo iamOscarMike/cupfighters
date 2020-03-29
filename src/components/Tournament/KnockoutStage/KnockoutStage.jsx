@@ -1,13 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getActiveTournament, getMatches } from "../../../redux/selectors";
+import { getActiveTournament } from "../../../redux/selectors";
+import Bracket from "./Bracket/Bracket";
 
 function KnockoutStage() {
     const tournament = useSelector((state) => (getActiveTournament(state)));
-    const matches = useSelector((state) => (getMatches(state)));
-
     return (
         <div className="KnockoutStage">
+            <Bracket
+                matches={tournament.matches}
+                players={tournament.players}
+                rounds={tournament.knockoutRounds}
+            />
         </div>
     );
 }
