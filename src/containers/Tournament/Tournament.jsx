@@ -12,6 +12,13 @@ import GroupStage from "../../components/Tournament/GroupStage/GroupStage";
 function Tournament({ tournament }) {
     const dispatch = useDispatch();
 
+    const canSeeGroupStage = canSeeStage(stages.groupStage, tournament.stage);
+    const isInGroupStage = stages.groupStage === tournament.stage;
+    const canSeeKnockoutStage = canSeeStage(stages.knockoutStage, tournament.stage);
+    const isInKnockoutStage = stages.knockoutStage === tournament.stage;
+    const canSeeFinished = canSeeStage(stages.finished, tournament.stage);
+    const isInFinished = stages.finished === tournament.stage;
+
     return (
         <div className="Tournament">
             <div className="row logo-container">
@@ -37,12 +44,12 @@ function Tournament({ tournament }) {
 
             {tournament.stage === stages.setup && <Setup />}
 
-            {canSeeStage(stages.groupStage, tournament.stage) &&
+            {canSeeGroupStage &&
                 <div>
                     <ul className="row nav nav-tabs" id="tournamentTab" role="tablist">
-                        <li className="nav-item col-4">
+                        <li className="nav-item col-4 text-center">
                             <a
-                                className={'nav-link' + (stages.groupStage === tournament.stage ? ' active' : '')}
+                                className={'nav-link' + (isInGroupStage ? ' active' : '')}
                                 data-toggle="tab"
                                 href="#group"
                                 role="tab"
@@ -50,11 +57,11 @@ function Tournament({ tournament }) {
                                 Groups
                     </a>
                         </li>
-                        <li className="nav-item col-4">
+                        <li className="nav-item col-4 text-center">
                             <a
-                                className={'nav-link' + (stages.knockoutStage === tournament.stage
+                                className={'nav-link' + (isInKnockoutStage
                                     ? ' active'
-                                    : (canSeeStage(stages.knockoutStage, tournament.stage) ? '' : ' disabled')
+                                    : (canSeeKnockoutStage ? '' : ' disabled')
                                 )}
                                 data-toggle="tab"
                                 href="#knockout"
@@ -63,11 +70,11 @@ function Tournament({ tournament }) {
                                 Knock-out
                     </a>
                         </li>
-                        <li className="nav-item col-4">
+                        <li className="nav-item col-4 text-center">
                             <a
-                                className={'nav-link' + (stages.finished === tournament.stage
+                                className={'nav-link' + (isInFinished
                                     ? ' active'
-                                    : (canSeeStage(stages.finished, tournament.stage) ? '' : ' disabled')
+                                    : (canSeeFinished ? '' : ' disabled')
                                 )}
                                 data-toggle="tab"
                                 href="#finished"
@@ -79,21 +86,21 @@ function Tournament({ tournament }) {
                     </ul>
                     <div className="tab-content" id="tournamentTabContent">
                         <div
-                            className={'tab-pane fade' + (stages.groupStage === tournament.stage ? ' show active' : '')}
+                            className={'tab-pane fade' + (isInGroupStage ? ' show active' : '')}
                             id="group"
                             role="tabpanel"
                         >
-                            {tournament.stage === stages.groupStage && <GroupStage />}
+                            {canSeeGroupStage && <GroupStage />}
                         </div>
                         <div
-                            className={'tab-pane fade' + (stages.knockoutStage === tournament.stage ? ' show active' : '')}
+                            className={'tab-pane fade' + (isInKnockoutStage ? ' show active' : '')}
                             id="knockout"
                             role="tabpanel"
                         >
                             Knock-out stage todo
                         </div>
                         <div
-                            className={'tab-pane fade' + (stages.finished === tournament.stage ? ' show active' : '')}
+                            className={'tab-pane fade' + (isInFinished ? ' show active' : '')}
                             id="finished"
                             role="tabpanel"
                         >

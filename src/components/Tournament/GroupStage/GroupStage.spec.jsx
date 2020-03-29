@@ -7,6 +7,7 @@ import Table from './Table/Table';
 import Match from '../../Match/Match';
 import { createGroupsStats, getPlayersThroughFromStats } from './scripts/stats';
 import { FINISH_GROUP_STAGE } from '../../../redux/actionTypes';
+import { stages } from '../../../types/stages';
 
 configure({ adapter: new Adapter() });
 jest.mock('react-redux');
@@ -15,6 +16,7 @@ jest.mock('./scripts/stats');
 describe('GroupStage', () => {
     const tournament = {
         amountOfPlayersInKnockout: 4,
+        stage: stages.groupStage,
         groups: [
             {
                 players: ['player#123', 'player#124', 'player#125'],
@@ -42,6 +44,9 @@ describe('GroupStage', () => {
         expect(groupStage.find('h3').at(1).text()).toEqual('Group b');
         expect(groupStage.find(Table).length).toEqual(2);
         expect(groupStage.find(Match).length).toEqual(6);
+        groupStage.find(Match).forEach((match) => {
+            expect(match.props().readOnly).toEqual(false);
+        });
     });
 
     it('renders a disabled button if not all matches are finished', () => {
@@ -67,6 +72,20 @@ describe('GroupStage', () => {
         expect(dispatch).toHaveBeenCalledWith({
             type: FINISH_GROUP_STAGE,
             payload: {},
+        });
+    });
+
+    it('hides a button if stage is not group stage', () => {
+        useSelector
+            .mockImplementationOnce(() => ({ ...tournament, stage: stages.knockoutStage }))
+            .mockImplementationOnce(() => ({ ['match#1']: { score1: 1, score2: 1 } }));
+        const dispatch = jest.fn(() => { });
+        useDispatch.mockImplementation(() => dispatch);
+
+        const groupStage = shallow(<GroupStage />);
+        expect(groupStage.find('button').length).toEqual(0);
+        groupStage.find(Match).forEach((match) => {
+            expect(match.props().readOnly).toEqual(true);
         });
     });
 });

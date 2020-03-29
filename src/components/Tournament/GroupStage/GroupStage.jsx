@@ -7,10 +7,12 @@ import { createGroupsStats, getPlayersThroughFromStats } from "./scripts/stats";
 import './GroupStage.scss';
 import { finishGroupStage } from "../../../redux/actions";
 import { useDispatch } from "react-redux";
+import { stages } from "../../../types/stages";
 
 function GroupStage() {
 
     const tournament = useSelector((state) => (getActiveTournament(state)));
+    const readOnly = tournament.stage !== stages.groupStage;
     const matches = useSelector((state) => (getMatches(state)));
     const groupStats = createGroupsStats(tournament.groups, matches);
     const { playersThrough, playersBestThird } = getPlayersThroughFromStats(
@@ -36,6 +38,7 @@ function GroupStage() {
                     key={`${j}-${i}`}
                     matchId={tournament.groups[j].matches[i]}
                     matchIndicator={String.fromCharCode(97 + j) + (i + 1)}
+                    readOnly={readOnly}
                 />);
             }
         }
@@ -69,16 +72,18 @@ function GroupStage() {
                         </div>
                     </div>
 
-                    <div className="row">
-                        <button
-                            type="button"
-                            className={'btn btn-outline-primary btn-lg m-auto' + (allowNextStage ? '' : ' disabled')}
-                            disabled={!allowNextStage}
-                            onClick={() => { dispatch(finishGroupStage()) }}
-                        >
-                            Finish Group Stage
+                    {!readOnly &&
+                        <div className="row">
+                            <button
+                                type="button"
+                                className={'btn btn-outline-primary btn-lg m-auto' + (allowNextStage ? '' : ' disabled')}
+                                disabled={!allowNextStage}
+                                onClick={() => { dispatch(finishGroupStage()) }}
+                            >
+                                Finish Group Stage
                             </button>
-                    </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

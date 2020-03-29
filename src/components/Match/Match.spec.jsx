@@ -64,4 +64,15 @@ describe('Match', () => {
         expect(match.find(`input#${matchId}-player2`).props().value).toEqual(3);
         expect(dispatch).toHaveBeenCalledWith({ type: UPDATE_MATCH, payload: { matchId, score1: 0, score2: 3 } });
     });
+
+    it('renders read only', () => {
+        useSelector
+            .mockImplementationOnce(() => ({ player1: 'player#123', player2: 'player#124', score1: 0, score2: 3 }))
+            .mockImplementationOnce(() => ('Guidetti'))
+            .mockImplementationOnce(() => ('Pelle'));
+        const match = shallow(<Match matchId={matchId} matchIndicator="test" readOnly={true}/>);
+
+        expect(match.find(`input#${matchId}-player1`).props().disabled).toEqual(true);
+        expect(match.find(`input#${matchId}-player2`).props().disabled).toEqual(true);
+    });
 });

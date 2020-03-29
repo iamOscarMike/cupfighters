@@ -8,6 +8,7 @@ import { getPlayer, getMatch } from "../../redux/selectors";
 function Match({
     matchId,
     matchIndicator,
+    readOnly,
 }) {
     const match = useSelector((state) => (getMatch(state, matchId)));
     const player1 = useSelector((state) => (getPlayer(state, match.player1)));
@@ -18,12 +19,16 @@ function Match({
 
     const dispatch = useDispatch();
     const changeScore1 = ((event) => {
-        setScore1(event.target.value);
-        dispatch(updateMatch(matchId, event.target.value, score2));
+        if (!readOnly) {
+            setScore1(event.target.value);
+            dispatch(updateMatch(matchId, event.target.value, score2));
+        }
     });
     const changeScore2 = ((event) => {
-        setScore2(event.target.value);
-        dispatch(updateMatch(matchId, score1, event.target.value));
+        if (!readOnly) {
+            setScore2(event.target.value);
+            dispatch(updateMatch(matchId, score1, event.target.value));
+        }
     });
 
     return (
@@ -43,6 +48,7 @@ function Match({
                             max="99"
                             value={score1 !== null ? score1 : ''}
                             onChange={changeScore1}
+                            disabled={readOnly}
                         />
                     </div>
                     <div className="col-sm-6 form-inline container-player2">
@@ -54,6 +60,7 @@ function Match({
                             max="99"
                             value={score2 !== null ? score2 : ''}
                             onChange={changeScore2}
+                            disabled={readOnly}
                         />
                         <div className="label-container">
                             <label htmlFor={`${matchId}-player2`}>{player2}</label>
@@ -68,6 +75,11 @@ function Match({
 Match.propTypes = {
     matchId: PropTypes.string.isRequired,
     matchIndicator: PropTypes.string.isRequired,
+    readOnly: PropTypes.bool,
+};
+
+Match.defaultProps = {
+    readOnly: false,
 };
 
 export default Match;
