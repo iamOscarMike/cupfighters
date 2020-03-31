@@ -94,6 +94,7 @@ export default function (state = {}, action) {
                                 ...state.list[tournamentId].matches[matchId],
                                 score1: action.payload.score1,
                                 score2: action.payload.score2,
+                                throughOnPenalties: action.payload.throughOnPenalties,
                             }
                         },
                     },

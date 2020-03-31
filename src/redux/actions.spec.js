@@ -59,10 +59,16 @@ describe('actions', () => {
         expect(finishSetup(players, amountOfPlayersInKnockout, groupSize)).toEqual(expectedAction);
     });
 
-    it('creates an update match action', () => {
+    it('creates an update match action without penalties', () => {
         const matchId = 'match#123';
-        const expectedAction = { type: UPDATE_MATCH, payload: { matchId, score1: 6, score2: 2 } };
+        const expectedAction = { type: UPDATE_MATCH, payload: { matchId, score1: 6, score2: 2, throughOnPenalties: null } };
         expect(updateMatch(matchId, '6', '2')).toEqual(expectedAction);
+    });
+
+    it('creates an update match action with penalties', () => {
+        const matchId = 'match#123';
+        const expectedAction = { type: UPDATE_MATCH, payload: { matchId, score1: 6, score2: 2, throughOnPenalties: 'player#1' } };
+        expect(updateMatch(matchId, '6', '2', 'player#1')).toEqual(expectedAction);
     });
 
     it('creates a finish group stage action', () => {

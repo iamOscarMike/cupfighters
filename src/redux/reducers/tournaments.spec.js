@@ -180,6 +180,44 @@ describe('tournaments', () => {
         expect(store.list[otherTournamentId]).toEqual(otherTournament);
     });
 
+    it('updates a match with throughOnPenalties', () => {
+        const tournamentId = 'tournament#123';
+        const matchId = 'match#123';
+        const score1 = 2;
+        const score2 = 2;
+        const payload = { matchId, score1, score2, throughOnPenalties: 'player#123' };
+
+        const store = tournaments(
+            {
+                activeTournamentId: tournamentId,
+                list: {
+                    [tournamentId]: {
+                        matches: {
+                            [matchId]: {
+                                player1: "player#123",
+                                player2: "player#234",
+                                score1: null,
+                                score2: null,
+                            },
+                        },
+                    },
+                },
+            },
+            {
+                type: UPDATE_MATCH,
+                payload,
+            }
+        );
+
+        expect(store.list[tournamentId].matches[matchId]).toEqual({
+            player1: "player#123",
+            player2: "player#234",
+            score1: 2,
+            score2: 2,
+            throughOnPenalties: "player#123",
+        });
+    });
+
     it('finishes the group stage', () => {
         const tournamentId = 'tournament#123';
         const matches = [

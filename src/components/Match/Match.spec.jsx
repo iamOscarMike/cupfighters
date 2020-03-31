@@ -58,11 +58,11 @@ describe('Match', () => {
 
         match.find(`input#${matchId}-player1`).simulate('change', { target: { value: 0 } });
         expect(match.find(`input#${matchId}-player1`).props().value).toEqual(0);
-        expect(dispatch).toHaveBeenCalledWith({ type: UPDATE_MATCH, payload: { matchId, score1: 0, score2: null } });
+        expect(dispatch).toHaveBeenCalledWith({ type: UPDATE_MATCH, payload: { matchId, score1: 0, score2: null, throughOnPenalties: null } });
 
         match.find(`input#${matchId}-player2`).simulate('change', { target: { value: 3 } });
         expect(match.find(`input#${matchId}-player2`).props().value).toEqual(3);
-        expect(dispatch).toHaveBeenCalledWith({ type: UPDATE_MATCH, payload: { matchId, score1: 0, score2: 3 } });
+        expect(dispatch).toHaveBeenCalledWith({ type: UPDATE_MATCH, payload: { matchId, score1: 0, score2: 3, throughOnPenalties: null } });
     });
 
     it('renders read only', () => {
@@ -70,9 +70,25 @@ describe('Match', () => {
             .mockImplementationOnce(() => ({ player1: 'player#123', player2: 'player#124', score1: 0, score2: 3 }))
             .mockImplementationOnce(() => ('Guidetti'))
             .mockImplementationOnce(() => ('Pelle'));
-        const match = shallow(<Match matchId={matchId} matchIndicator="test" readOnly={true}/>);
+        const match = shallow(<Match matchId={matchId} matchIndicator="test" readOnly={true} />);
 
         expect(match.find(`input#${matchId}-player1`).props().disabled).toEqual(true);
         expect(match.find(`input#${matchId}-player2`).props().disabled).toEqual(true);
+    });
+
+    it('renders penalty buttons', () => {
+        useSelector
+            .mockImplementationOnce(() => ({ player1: 'player#123', player2: 'player#124', score1: 0, score2: 0 }))
+            .mockImplementationOnce(() => ('Guidetti'))
+            .mockImplementationOnce(() => ('Pelle'));
+
+        const dispatch = jest.fn(() => { });
+        useDispatch.mockImplementation(() => dispatch);
+
+        const match = shallow(<Match matchId={matchId} matchIndicator="test" allowPenalties={true} />);
+        expect(match.find('button.button-penalty').length).toEqual(2);
+
+        match.find('button.button-penalty').at(1).simulate('click');
+        expect(dispatch).toHaveBeenCalledWith({ type: UPDATE_MATCH, payload: { matchId, score1: 0, score2: 0, throughOnPenalties: 'player#124' } });
     });
 });

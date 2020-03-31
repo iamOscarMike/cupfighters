@@ -40,12 +40,13 @@ export const finishSetup = (players, amountOfPlayersInKnockout, groupSize) => ({
     },
 });
 
-export const updateMatch = (matchId, score1, score2) => ({
+export const updateMatch = (matchId, score1, score2, throughOnPenalties = null) => ({
     type: UPDATE_MATCH,
     payload: {
         matchId,
         score1: score1 !== null ? parseInt(score1) : null,
         score2: score2 !== null ? parseInt(score2) : null,
+        throughOnPenalties
     },
 });
 

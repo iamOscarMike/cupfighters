@@ -19,6 +19,7 @@ const getRounds = (rounds) => {
                     <div className="row match-container">
                         {round.matches.map((match, j) => (
                             <Match
+                                allowPenalties={true}
                                 key={`${i}-${j}`}
                                 matchId={match}
                                 matchIndicator={roundGroupIndicators[round.matches.length] + (j + 1)}
