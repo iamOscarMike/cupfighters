@@ -19,7 +19,7 @@ describe('Bracket', () => {
 
     const matches = {
         ['match#1']: { player1: 'player#1', player2: 'player#2', score1: 1, score2: 2 },
-        ['match#2']: { player1: 'player#3', player2: 'player#4', score1: null, score2: null },
+        ['match#2']: { player1: 'player#3', player2: 'player#4', score1: 2, score2: 2, throughOnPenalties: 'player#3' },
         ['match#3']: { player1: 'player#5', player2: 'player#6', score1: null, score2: null },
         ['match#4']: { player1: 'player#7', player2: 'player#8', score1: null, score2: null },
     };
@@ -42,6 +42,7 @@ describe('Bracket', () => {
 
         expect(bracket.find('div.round-of-8').at(1).find('div.match').at(0).find('span.player').at(0).text()).toEqual('Makaay');
         expect(bracket.find('div.round-of-8').at(1).find('div.match').at(0).find('span.player').at(1).text()).toEqual('Houtman');
+        expect(bracket.find('div.round-of-8').at(1).find('div.match').at(0).find('div.penalties').length).toEqual(1);
 
         expect(bracket.find('div.round-of-8').at(1).find('div.match').at(1).find('span.player').at(0).text()).toEqual('Moulijn');
         expect(bracket.find('div.round-of-8').at(1).find('div.match').at(1).find('span.player').at(1).text()).toEqual('Kalou');

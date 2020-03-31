@@ -25,14 +25,14 @@ const getMatch = (key, match, players, isFinal) => {
     const player1 = player(
         isFinal ? 'col-6 player-1' : 'mt-3 mb-3 p-3 background-dark',
         players[match.player1] || '',
-        match.score1 || '',
+        Number.isInteger(match.score1) ? match.score1 : '',
         match.throughOnPenalties && match.throughOnPenalties === match.player1
     );
 
     const player2 = player(
         isFinal ? 'col-6 player-2' : 'mt-3 mb-3 p-3 background-dark',
         players[match.player2] || '',
-        match.score2 || '',
+        Number.isInteger(match.score2) ? match.score2 : '',
         match.throughOnPenalties && match.throughOnPenalties === match.player2
     );
 
