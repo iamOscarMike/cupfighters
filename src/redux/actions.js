@@ -6,6 +6,7 @@ import {
     FINISH_SETUP,
     UPDATE_MATCH,
     FINISH_GROUP_STAGE,
+    FINISH_KNOCKOUT_ROUND,
 } from "./actionTypes";
 
 export const startNewTournament = title => ({
@@ -52,5 +53,10 @@ export const updateMatch = (matchId, score1, score2, throughOnPenalties = null) 
 
 export const finishGroupStage = () => ({
     type: FINISH_GROUP_STAGE,
+    payload: {},
+});
+
+export const finishKnockoutRound = () => ({
+    type: FINISH_KNOCKOUT_ROUND,
     payload: {},
 });

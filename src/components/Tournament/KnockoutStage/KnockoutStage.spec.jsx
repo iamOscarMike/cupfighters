@@ -2,10 +2,11 @@ import React from 'react';
 import KnockoutStage from './KnockoutStage';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, shallow } from 'enzyme';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { stages } from '../../../types/stages';
 import Bracket from './Bracket/Bracket';
 import Match from '../../Match/Match';
+import { FINISH_KNOCKOUT_ROUND } from '../../../redux/actionTypes';
 
 configure({ adapter: new Adapter() });
 jest.mock('react-redux');
@@ -51,8 +52,17 @@ describe('KnockoutStage', () => {
                 },
             }));
 
+        const dispatch = jest.fn(() => { });
+        useDispatch.mockImplementation(() => dispatch);
+
         const knockoutStage = shallow(<KnockoutStage />);
         expect(knockoutStage.find('button').length).toEqual(1);
         expect(knockoutStage.find('button').props().disabled).toEqual(false);
+
+        knockoutStage.find('button').simulate('click');
+        expect(dispatch).toHaveBeenCalledWith({
+            type: FINISH_KNOCKOUT_ROUND,
+            payload: {},
+        });
     });
 });

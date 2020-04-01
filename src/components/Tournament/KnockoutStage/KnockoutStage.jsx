@@ -1,11 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getActiveTournament } from "../../../redux/selectors";
 import Bracket from "./Bracket/Bracket";
 import Match from "../../Match/Match";
 import "./KnockoutStage.scss";
+import { finishKnockoutRound } from "../../../redux/actions";
 
-const isRoundFinished = (rounds, i) => (rounds.length -1 > i);
+const isRoundFinished = (rounds, i) => (rounds.length - 1 > i);
 
 const roundComplete = (round, matches) => (
     round.matches.filter((match) => (!(
@@ -19,6 +20,7 @@ const roundComplete = (round, matches) => (
 );
 
 const getRounds = (rounds, matches) => {
+    const dispatch = useDispatch();
     const roundTitles = { 1: 'Final', 2: 'Semi-finals', 4: 'Quarter-finals' };
     const roundGroupIndicators = { 1: 'F', 2: 'S', 4: 'Q' };
 
@@ -36,6 +38,7 @@ const getRounds = (rounds, matches) => {
                                 key={`${i}-${j}`}
                                 matchId={match}
                                 matchIndicator={roundGroupIndicators[round.matches.length] + (j + 1)}
+                                readOnly={isRoundFinished(rounds, i)}
                             />
                         ))}
                     </div>
@@ -45,7 +48,7 @@ const getRounds = (rounds, matches) => {
                                 type="button"
                                 className="btn btn-outline-primary btn-lg d-block m-auto"
                                 disabled={!roundComplete(round, matches)}
-                                onClick={() => { }}
+                                onClick={() => { dispatch(finishKnockoutRound()) }}
                             >
                                 {`Finish ${round.matches.length === 1 ? 'tournament' : 'round'}`}
                             </button>
@@ -68,7 +71,7 @@ function KnockoutStage() {
                 rounds={tournament.knockoutRounds}
             />
 
-            <div className="row col-sm-12 col-md-10 offset-md-1">
+            <div className="col-sm-12 col-md-10 offset-md-1">
                 {rounds}
             </div>
         </div>

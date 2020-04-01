@@ -6,11 +6,13 @@ import {
     FINISH_SETUP,
     UPDATE_MATCH,
     FINISH_GROUP_STAGE,
+    FINISH_KNOCKOUT_ROUND,
 } from "../actionTypes";
 import { stages } from "../../types/stages";
 import generatePlayers from "./tournaments/generatePlayers";
 import generateGroups from "./tournaments/generateGroups";
 import generateKnockoutMatches from "./tournaments/generateKnockoutMatches";
+import generateNextKnockoutRound from "./tournaments/generateNextKnockoutRound";
 
 function generateMatchId() {
     return 'match#' + Math.random().toString(10).substr(2, 10);
@@ -124,6 +126,34 @@ export default function (state = {}, action) {
                 }
             }
         }
+        case FINISH_KNOCKOUT_ROUND: {
+            const tournamentId = state.activeTournamentId;
+            const knockoutRounds = [...state.list[tournamentId].knockoutRounds];
+            const matches = {};
+            generateNextKnockoutRound(knockoutRounds[knockoutRounds.length - 1], state.list[tournamentId].matches).forEach((match) => {
+                matches[generateMatchId()] = match;
+            });
+
+            return {
+                ...state,
+                list: {
+                    ...state.list,
+                    [tournamentId]: {
+                        ...state.list[tournamentId],
+                        stage: stages.knockoutStage,
+                        matches: {
+                            ...state.list[tournamentId].matches,
+                            ...matches,
+                        },
+                        knockoutRounds: [
+                            ...knockoutRounds,
+                            { matches: Object.keys(matches) }
+                        ],
+                    },
+                }
+            }
+        }
+
         default:
             return state;
     }
