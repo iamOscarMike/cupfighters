@@ -5,7 +5,20 @@ import Bracket from "./Bracket/Bracket";
 import Match from "../../Match/Match";
 import "./KnockoutStage.scss";
 
-const getRounds = (rounds) => {
+const isRoundFinished = (rounds, i) => (rounds.length -1 > i);
+
+const roundComplete = (round, matches) => (
+    round.matches.filter((match) => (!(
+        Number.isInteger(matches[match].score1)
+        && Number.isInteger(matches[match].score2)
+        && (
+            matches[match].score1 !== matches[match].score2
+            || matches[match].throughOnPenalties
+        )
+    ))).length === 0
+);
+
+const getRounds = (rounds, matches) => {
     const roundTitles = { 1: 'Final', 2: 'Semi-finals', 4: 'Quarter-finals' };
     const roundGroupIndicators = { 1: 'F', 2: 'S', 4: 'Q' };
 
@@ -26,6 +39,18 @@ const getRounds = (rounds) => {
                             />
                         ))}
                     </div>
+                    {!isRoundFinished(rounds, i) &&
+                        <div className="col-sm-12">
+                            <button
+                                type="button"
+                                className="btn btn-outline-primary btn-lg d-block m-auto"
+                                disabled={!roundComplete(round, matches)}
+                                onClick={() => { }}
+                            >
+                                {`Finish ${round.matches.length === 1 ? 'tournament' : 'round'}`}
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
         );
@@ -34,7 +59,7 @@ const getRounds = (rounds) => {
 
 function KnockoutStage() {
     const tournament = useSelector((state) => (getActiveTournament(state)));
-    const rounds = getRounds(tournament.knockoutRounds);
+    const rounds = getRounds(tournament.knockoutRounds, tournament.matches);
     return (
         <div className="KnockoutStage">
             <Bracket

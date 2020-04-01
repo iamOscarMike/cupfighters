@@ -14,7 +14,7 @@ describe('KnockoutStage', () => {
     const tournament = {
         stage: stages.knockoutStage,
         knockoutRounds: [{ matches: ['match#1', 'match#2'] }],
-        matches: { 
+        matches: {
             ['match#1']: { player1: 'player#1', player2: 'player#2', score1: null, score2: null },
             ['match#2']: { player1: 'player#3', player2: 'player#4', score1: null, score2: null },
         },
@@ -28,8 +28,7 @@ describe('KnockoutStage', () => {
 
     it('renders the knockout stage', () => {
         useSelector
-            .mockImplementationOnce(() => (tournament))
-            .mockImplementationOnce(() => ({ ['match#1']: { score1: null, score2: null } }));
+            .mockImplementationOnce(() => (tournament));
 
         const knockoutStage = shallow(<KnockoutStage />);
         expect(knockoutStage.find(Bracket).length).toEqual(1);
@@ -38,5 +37,22 @@ describe('KnockoutStage', () => {
         expect(knockoutStage.find(Bracket).props().players).toEqual(tournament.players);
 
         expect(knockoutStage.find(Match).length).toEqual(2);
+        expect(knockoutStage.find('button').length).toEqual(1);
+        expect(knockoutStage.find('button').props().disabled).toEqual(true);
+    });
+
+    it('renders an enabled finish round button', () => {
+        useSelector
+            .mockImplementationOnce(() => ({
+                ...tournament,
+                matches: {
+                    ['match#1']: { player1: 'player#1', player2: 'player#2', score1: 2, score2: 0 },
+                    ['match#2']: { player1: 'player#3', player2: 'player#4', score1: 0, score2: 0, throughOnPenalties: 'player#3' },
+                },
+            }));
+
+        const knockoutStage = shallow(<KnockoutStage />);
+        expect(knockoutStage.find('button').length).toEqual(1);
+        expect(knockoutStage.find('button').props().disabled).toEqual(false);
     });
 });
