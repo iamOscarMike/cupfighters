@@ -5,6 +5,7 @@ import Bracket from "./Bracket/Bracket";
 import Match from "../../Match/Match";
 import "./KnockoutStage.scss";
 import { finishKnockoutRound, finishTournament } from "../../../redux/actions";
+import { stages } from "../../../types/stages";
 
 const isRoundFinished = (rounds, i) => (rounds.length - 1 > i);
 
@@ -19,7 +20,7 @@ const roundComplete = (round, matches) => (
     ))).length === 0
 );
 
-const getRounds = (rounds, matches) => {
+const getRounds = (rounds, matches, readOnly) => {
     const dispatch = useDispatch();
     const roundTitles = { 1: 'Final', 2: 'Semi-finals', 4: 'Quarter-finals' };
     const roundGroupIndicators = { 1: 'F', 2: 'S', 4: 'Q' };
@@ -38,11 +39,11 @@ const getRounds = (rounds, matches) => {
                                 key={`${i}-${j}`}
                                 matchId={match}
                                 matchIndicator={roundGroupIndicators[round.matches.length] + (j + 1)}
-                                readOnly={isRoundFinished(rounds, i)}
+                                readOnly={readOnly || isRoundFinished(rounds, i)}
                             />
                         ))}
                     </div>
-                    {!isRoundFinished(rounds, i) &&
+                    {!readOnly && !isRoundFinished(rounds, i) &&
                         <div className="col-sm-12">
                             <button
                                 type="button"
@@ -67,7 +68,8 @@ const getRounds = (rounds, matches) => {
 
 function KnockoutStage() {
     const tournament = useSelector((state) => (getActiveTournament(state)));
-    const rounds = getRounds(tournament.knockoutRounds, tournament.matches);
+    const readOnly = tournament.stage !== stages.knockoutStage;
+    const rounds = getRounds(tournament.knockoutRounds, tournament.matches, readOnly);
     return (
         <div className="KnockoutStage">
             <Bracket

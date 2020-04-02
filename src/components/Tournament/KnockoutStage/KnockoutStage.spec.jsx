@@ -89,4 +89,29 @@ describe('KnockoutStage', () => {
             payload: {},
         });
     });
+
+    it('renders knockout stage readonly', () => {
+        useSelector
+            .mockImplementationOnce(() => ({
+                stage: stages.finished,
+                knockoutRounds: [{ matches: ['match#1', 'match#2'] }, { matches: ['match#3']}],
+                matches: {
+                    ['match#1']: { player1: 'player#1', player2: 'player#2', score1: 2, score2: 1 },
+                    ['match#2']: { player1: 'player#3', player2: 'player#4', score1: 1, score2: 2 },
+                    ['match#3']: { player1: 'player#1', player2: 'player#4', score1: 3, score2: 2 },
+                },
+                players: {
+                    ['player#1']: 'van Gobbel',
+                    ['player#2']: 'Vossen',
+                    ['player#3']: 'Paauwe',
+                    ['player#4']: 'Cruz',
+                },
+            }));
+
+        const knockoutStage = shallow(<KnockoutStage />);
+        expect(knockoutStage.find('button').length).toEqual(0);
+        knockoutStage.find(Match).forEach((match) => {
+            expect(match.props().readOnly).toEqual(true);
+        });
+    });
 });
