@@ -4,7 +4,7 @@ import { getActiveTournament } from "../../../redux/selectors";
 import Bracket from "./Bracket/Bracket";
 import Match from "../../Match/Match";
 import "./KnockoutStage.scss";
-import { finishKnockoutRound } from "../../../redux/actions";
+import { finishKnockoutRound, finishTournament } from "../../../redux/actions";
 
 const isRoundFinished = (rounds, i) => (rounds.length - 1 > i);
 
@@ -48,7 +48,12 @@ const getRounds = (rounds, matches) => {
                                 type="button"
                                 className="btn btn-outline-primary btn-lg d-block m-auto"
                                 disabled={!roundComplete(round, matches)}
-                                onClick={() => { dispatch(finishKnockoutRound()) }}
+                                onClick={() => {
+                                    dispatch(round.matches.length === 1
+                                        ? finishTournament()
+                                        : finishKnockoutRound())
+                                }
+                                }
                             >
                                 {`Finish ${round.matches.length === 1 ? 'tournament' : 'round'}`}
                             </button>

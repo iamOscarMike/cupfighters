@@ -7,6 +7,7 @@ import {
     UPDATE_MATCH,
     FINISH_GROUP_STAGE,
     FINISH_KNOCKOUT_ROUND,
+    FINISH_TOURNAMENT,
 } from "../actionTypes";
 import { stages } from "../../types/stages";
 import generatePlayers from "./tournaments/generatePlayers";
@@ -140,7 +141,6 @@ export default function (state = {}, action) {
                     ...state.list,
                     [tournamentId]: {
                         ...state.list[tournamentId],
-                        stage: stages.knockoutStage,
                         matches: {
                             ...state.list[tournamentId].matches,
                             ...matches,
@@ -153,7 +153,19 @@ export default function (state = {}, action) {
                 }
             }
         }
-
+        case FINISH_TOURNAMENT: {
+            const tournamentId = state.activeTournamentId;
+            return {
+                ...state,
+                list: {
+                    ...state.list,
+                    [tournamentId]: {
+                        ...state.list[tournamentId],
+                        stage: stages.finished,
+                    },
+                }
+            }
+        }
         default:
             return state;
     }

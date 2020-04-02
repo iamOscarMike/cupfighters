@@ -7,6 +7,7 @@ import {
     updateMatch,
     finishGroupStage,
     finishKnockoutRound,
+    finishTournament,
 } from "./actions";
 import {
     START_NEW_TOURNAMENT,
@@ -17,6 +18,7 @@ import {
     UPDATE_MATCH,
     FINISH_GROUP_STAGE,
     FINISH_KNOCKOUT_ROUND,
+    FINISH_TOURNAMENT,
 } from "./actionTypes";
 
 describe('actions', () => {
@@ -81,5 +83,10 @@ describe('actions', () => {
     it('creates a finish knockout round action', () => {
         const expectedAction = { type: FINISH_KNOCKOUT_ROUND, payload: {} };
         expect(finishKnockoutRound()).toEqual(expectedAction);
+    });
+
+    it('creates a finish tournament action', () => {
+        const expectedAction = { type: FINISH_TOURNAMENT, payload: {} };
+        expect(finishTournament()).toEqual(expectedAction);
     });
 });

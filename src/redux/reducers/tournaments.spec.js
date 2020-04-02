@@ -8,6 +8,7 @@ import {
     UPDATE_MATCH,
     FINISH_GROUP_STAGE,
     FINISH_KNOCKOUT_ROUND,
+    FINISH_TOURNAMENT,
 } from "../actionTypes";
 import { stages } from "../../types/stages";
 import generateKnockoutMatches from "./tournaments/generateKnockoutMatches";
@@ -285,5 +286,25 @@ describe('tournaments', () => {
         const matchIds = Object.keys(store.list[tournamentId].matches);
         expect(store.list[tournamentId].knockoutRounds[1].matches).toContain(matchIds[0]);
         expect(store.list[tournamentId].knockoutRounds[1].matches).toContain(matchIds[1]);
+    });
+
+    it('finishes the tournament', () => {
+        const tournamentId = 'tournament#123';
+        const store = tournaments(
+            {
+                activeTournamentId: tournamentId,
+                list: {
+                    [tournamentId]: {
+                        stage: stages.knockoutStage,
+                    }
+                },
+            },
+            {
+                type: FINISH_TOURNAMENT,
+                payload: {},
+            }
+        );
+
+        expect(store.list[tournamentId].stage).toMatch(stages.finished);
     });
 });
