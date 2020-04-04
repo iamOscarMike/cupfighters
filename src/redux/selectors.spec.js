@@ -5,7 +5,9 @@ import {
     getMatch,
     getPlayer,
     getMatches,
+    getStats,
 } from "./selectors";
+import { stages } from "../types/stages";
 
 describe('getTournamentList', () => {
     it('returns a list of tournaments', () => {
@@ -174,5 +176,74 @@ describe('getPlayer', () => {
             },
             'player#124'
         )).toEqual('Kalou');
+    });
+});
+
+describe('getStats', () => {
+    const activeTournamentId = 'tournament#123';
+    const state = {
+        tournaments: {
+            activeTournamentId,
+            list: {
+                [activeTournamentId]: {
+                    stage: stages.finished,
+                    title: 'My finished tournament',
+                    players: {
+                        ['player#1']: 'Van der Gijp',
+                        ['player#2']: 'Kindvall',
+                        ['player#3']: 'Kuyt',
+                        ['player#4']: 'Houtman',
+                        ['player#5']: 'Van Hanegem',
+                        ['player#6']: 'Van Persie',
+                        ['player#7']: 'Moulijn',
+                        ['player#8']: 'De Goeij',
+                    },
+                    matches: {
+                        ['match#1']: { player1: 'player#1', player2: 'player#2', score1: 2, score2: 2 },
+                        ['match#2']: { player1: 'player#3', player2: 'player#4', score1: 3, score2: 1 },
+                        ['match#3']: { player1: 'player#2', player2: 'player#3', score1: 2, score2: 1 },
+                        ['match#4']: { player1: 'player#4', player2: 'player#1', score1: 3, score2: 1 },
+                        ['match#5']: { player1: 'player#1', player2: 'player#3', score1: 1, score2: 2 },
+                        ['match#6']: { player1: 'player#2', player2: 'player#4', score1: 3, score2: 2 },
+
+                        ['match#7']: { player1: 'player#5', player2: 'player#6', score1: 1, score2: 2 },
+                        ['match#8']: { player1: 'player#7', player2: 'player#8', score1: 0, score2: 1 },
+                        ['match#9']: { player1: 'player#6', player2: 'player#7', score1: 2, score2: 1 },
+                        ['match#10']: { player1: 'player#8', player2: 'player#5', score1: 2, score2: 0 },
+                        ['match#11']: { player1: 'player#5', player2: 'player#7', score1: 3, score2: 2 },
+                        ['match#12']: { player1: 'player#6', player2: 'player#8', score1: 0, score2: 1 },
+
+                        ['match#13']: { player1: 'player#3', player2: 'player#7', score1: 0, score2: 1 },
+                        ['match#14']: { player1: 'player#8', player2: 'player#4', score1: 0, score2: 0, throughOnPenalties: 'player#4' },
+
+                        ['match#15']: { player1: 'player#7', player2: 'player#4', score1: 3, score2: 2 },
+                    },
+                    amountOfPlayersInKnockout: 4,
+                    groupSize: 4,
+                    groups: [
+                        {
+                            players: ['player#1', 'player#2', 'player#3', 'player#4'],
+                            matches: ['match#1', 'match#2', 'match#3', 'match#4', 'match#5', 'match#6'],
+                        },
+                        {
+                            players: ['player#5', 'player#6', 'player#7', 'player#8'],
+                            matches: ['match#7', 'match#8', 'match#9', 'match#10', 'match#11', 'match#12'],
+                        }
+                    ],
+                    knockoutRounds: [
+                        { matches: ['match#13', 'match#14'] },
+                        { matches: ['match#15'] },
+                    ]
+                },
+            },
+        }
+    };
+
+    it('returns the winner of the tournament', () => {
+        expect(getStats(state)).toEqual({
+            winner: 'player#7',
+            runnerUp: 'player#4',
+            semiFinalists: ['player#3', 'player#8'],
+        });
     });
 });
