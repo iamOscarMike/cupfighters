@@ -23,11 +23,12 @@ describe('Statistics', () => {
                 runnerUp: 'player#3',
                 semiFinalists: ['player#1', 'player#4'],
                 goldenBoot: ['player#1', 'player#2', 'player#3'],
+                goldenGlove: ['player#1', 'player#2', 'player#3'],
                 playerStats: {
-                    ['player#1']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0 },
-                    ['player#2']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0 },
-                    ['player#3']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0 },
-                    ['player#4']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0 },
+                    ['player#1']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0, cleanSheets: 0 },
+                    ['player#2']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0, cleanSheets: 0 },
+                    ['player#3']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0, cleanSheets: 0 },
+                    ['player#4']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0, cleanSheets: 0 },
                 }
             }));
 

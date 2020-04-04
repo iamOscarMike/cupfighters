@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { getStats, getActiveTournament } from "../../../redux/selectors";
 import { useSelector } from "react-redux";
 import Icon from '@mdi/react';
-import { mdiTrophy, mdiMedal, mdiBullseyeArrow } from '@mdi/js';
+import { mdiTrophy, mdiMedal, mdiBullseyeArrow, mdiHand } from '@mdi/js';
 import './Statistics.scss';
 import confetti from "canvas-confetti";
 
@@ -120,6 +120,37 @@ function Statistics() {
                                     <td>{stats.playerStats[stats.goldenBoot[2]].played}</td>
                                     <td>{stats.playerStats[stats.goldenBoot[2]].goalsFor}</td>
                                     <td>{stats.playerStats[stats.goldenBoot[2]].goalDifference}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="col-sm-12 col-md-4">
+                        <h3 className="text-center">Golden glove</h3>
+
+                        <table className="table group table-lg">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>CS</th>
+                                    <th>GA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><Icon className="gold" path={mdiHand} />{players[stats.goldenGlove[0]]}</td>
+                                    <td>{stats.playerStats[stats.goldenGlove[0]].cleanSheets}</td>
+                                    <td>{stats.playerStats[stats.goldenGlove[0]].goalsAgainst}</td>
+                                </tr>
+                                <tr>
+                                    <td><Icon className="silver" path={mdiHand} />{players[stats.goldenGlove[1]]}</td>
+                                    <td>{stats.playerStats[stats.goldenGlove[1]].cleanSheets}</td>
+                                    <td>{stats.playerStats[stats.goldenGlove[1]].goalsAgainst}</td>
+                                </tr>
+                                <tr>
+                                    <td><Icon className="bronze" path={mdiHand} />{players[stats.goldenGlove[2]]}</td>
+                                    <td>{stats.playerStats[stats.goldenGlove[2]].cleanSheets}</td>
+                                    <td>{stats.playerStats[stats.goldenGlove[2]].goalsAgainst}</td>
                                 </tr>
                             </tbody>
                         </table>

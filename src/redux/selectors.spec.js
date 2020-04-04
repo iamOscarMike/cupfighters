@@ -245,5 +245,6 @@ describe('getStats', () => {
         expect(stats.runnerUp).toEqual('player#4');
         expect(stats.semiFinalists).toEqual(['player#3', 'player#8']);
         expect(stats.goldenBoot).toEqual(['player#4', 'player#2', 'player#7']);
+        expect(stats.goldenGlove).toEqual(['player#8', 'player#7', 'player#4']);
     });
 });

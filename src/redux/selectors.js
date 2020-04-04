@@ -63,6 +63,7 @@ export const getStats = (state) => {
             goalsFor: 0,
             goalsAgainst: 0,
             goalDifference: 0,
+            cleanSheets: 0,
         };
     });
 
@@ -78,6 +79,12 @@ export const getStats = (state) => {
         } else {
             playerStats[match.player1].draw++;
             playerStats[match.player2].draw++;
+        }
+        if (match.score1 === 0) {
+            playerStats[match.player2].cleanSheets++;
+        }
+        if (match.score2 === 0) {
+            playerStats[match.player1].cleanSheets++;
         }
         playerStats[match.player1].goalsFor = playerStats[match.player1].goalsFor + match.score1;
         playerStats[match.player2].goalsFor = playerStats[match.player2].goalsFor + match.score2;
@@ -102,11 +109,24 @@ export const getStats = (state) => {
         .map((player) => (player.player))
         .slice(0, 3);
 
+    const goldenGlove = Object.values(playerStats).sort((player1, player2) => {
+        if (player1.cleanSheets !== player2.cleanSheets) {
+            return player2.cleanSheets - player1.cleanSheets;
+        }
+        if (player1.goalsAgainst !== player2.goalsAgainst) {
+            return player1.goalsAgainst < player2.goalsAgainst ? -1 : 1;
+        }
+        return 0;
+    })
+        .map((player) => (player.player))
+        .slice(0, 3);
+
     return {
         winner,
         runnerUp,
         semiFinalists,
         playerStats,
         goldenBoot,
+        goldenGlove,
     };
 }
