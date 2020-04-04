@@ -65,67 +65,32 @@ $bronze: #CC511C;
             }
         }
     }
+
+    table {
+
+        td:not(:first-child),
+        th:not(:first-child) {
+            text-align: right;
+        }
+
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 1rem;
+        }
+    }
+
+    svg {
+        &.gold {
+            fill: $gold;
+        }
+
+        &.silver {
+            fill: $silver;
+        }
+
+        &.bronze {
+            fill: $bronze;
+        }
+    }
 }
-
-// .Statistics {
-//     .tournament-standings {
-
-//         .container {
-
-//             .icon,
-//             .player {
-//                 vertical-align: middle;
-//                 display: inline-block;
-//             }
-
-//             .icon {
-//                 width: 2rem;
-//                 height: 2rem;
-//                 margin-left: 1rem;
-//                 margin-right: 2rem;
-//             }
-
-//             .player {
-//                 font-family: 'Montserrat';
-//                 font-weight: 900;
-//                 text-transform: uppercase;
-//                 font-size: 1.5rem;
-//             }
-//         }
-
-//         .winner {
-//             .icon {
-//                 fill: $gold;
-//                 width: 4rem;
-//                 height: 4rem;
-//                 margin-right: 1rem;
-//                 margin-left: 0;
-//             }
-
-//             .player {
-//                 color: $gold;
-//                 font-size: 3rem;
-//             }
-//         }
-
-//         .runnerup {
-//             span {
-//                 color: $silver;
-//             }
-
-//             svg {
-//                 fill: $silver;
-//             }
-//         }
-
-//         .semifinalists {
-//             span {
-//                 color: $bronze;
-//             }
-
-//             svg {
-//                 fill: $bronze;
-//             }
-//         }
-//     }
-// }

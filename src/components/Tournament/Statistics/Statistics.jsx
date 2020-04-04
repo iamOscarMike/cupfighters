@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { getStats, getActiveTournament } from "../../../redux/selectors";
 import { useSelector } from "react-redux";
 import Icon from '@mdi/react';
-import { mdiTrophy, mdiMedal } from '@mdi/js';
+import { mdiTrophy, mdiMedal, mdiBullseyeArrow } from '@mdi/js';
 import './Statistics.scss';
 import confetti from "canvas-confetti";
 
@@ -43,7 +43,7 @@ function Statistics() {
     return (
         <div className="Statistics">
 
-            <div className="tournament-standings">
+            <div className="tournament-standings mb-5">
 
                 <div className="row text-center">
                     <div className="col-12 mb-3">
@@ -88,42 +88,45 @@ function Statistics() {
                 </div>
             </div>
 
-            {/* <div className="row">
-                <div className="col-sm-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2">
-                    <div className="tournament-standings">
-                        <div className="container winner">
-                            <span className="icon">
-                                <Icon path={mdiTrophy} />
-                            </span>
-                            <span className="player">
-                                {players[stats.winner]}
-                            </span>
-                        </div>
-                        <div className="container runnerup">
-                            <span className="icon">
-                                <Icon path={mdiMedal} />
-                            </span>
-                            <span className="player">
-                                {players[stats.runnerUp]}
-                            </span>
-                        </div>
-                        <div className="container semifinalists">
-                            <span className="icon">
-                                <Icon path={mdiMedal} />
-                            </span>
-                            <span className="player">
-                                {players[stats.semiFinalists[0]]}
-                            </span>
-                        </div>
-                        <div className="container semifinalists">
-                            <span className="icon"></span>
-                            <span className="player">
-                                {players[stats.semiFinalists[1]]}
-                            </span>
-                        </div>
+            <div className="tournament-awards">
+                <div className="row golden-boot">
+                    <div className="col-sm-12 col-md-4 offset-md-2">
+                        <h3 className="text-center">Golden boot</h3>
+
+                        <table className="table group table-lg">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Games</th>
+                                    <th>Goals</th>
+                                    <th>+/-</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><Icon className="gold" path={mdiBullseyeArrow} />{players[stats.goldenBoot[0]]}</td>
+                                    <td>{stats.playerStats[stats.goldenBoot[0]].played}</td>
+                                    <td>{stats.playerStats[stats.goldenBoot[0]].goalsFor}</td>
+                                    <td>{stats.playerStats[stats.goldenBoot[0]].goalDifference}</td>
+                                </tr>
+                                <tr>
+                                    <td><Icon className="silver" path={mdiBullseyeArrow} />{players[stats.goldenBoot[1]]}</td>
+                                    <td>{stats.playerStats[stats.goldenBoot[1]].played}</td>
+                                    <td>{stats.playerStats[stats.goldenBoot[1]].goalsFor}</td>
+                                    <td>{stats.playerStats[stats.goldenBoot[1]].goalDifference}</td>
+                                </tr>
+                                <tr>
+                                    <td><Icon className="bronze" path={mdiBullseyeArrow} />{players[stats.goldenBoot[2]]}</td>
+                                    <td>{stats.playerStats[stats.goldenBoot[2]].played}</td>
+                                    <td>{stats.playerStats[stats.goldenBoot[2]].goalsFor}</td>
+                                    <td>{stats.playerStats[stats.goldenBoot[2]].goalDifference}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div> */}
+            </div>
+
         </div>
     );
 };

@@ -240,10 +240,10 @@ describe('getStats', () => {
     };
 
     it('returns the winner of the tournament', () => {
-        expect(getStats(state)).toEqual({
-            winner: 'player#7',
-            runnerUp: 'player#4',
-            semiFinalists: ['player#3', 'player#8'],
-        });
+        const stats = getStats(state);
+        expect(stats.winner).toEqual('player#7');
+        expect(stats.runnerUp).toEqual('player#4');
+        expect(stats.semiFinalists).toEqual(['player#3', 'player#8']);
+        expect(stats.goldenBoot).toEqual(['player#4', 'player#2', 'player#7']);
     });
 });
