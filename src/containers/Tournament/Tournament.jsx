@@ -9,6 +9,7 @@ import { stages, canSeeStage } from "../../types/stages";
 import Setup from "../../components/Tournament/Setup/Setup";
 import GroupStage from "../../components/Tournament/GroupStage/GroupStage";
 import KnockoutStage from "../../components/Tournament/KnockoutStage/KnockoutStage";
+import Statistics from "../../components/Tournament/Statistics/Statistics";
 
 function Tournament({ tournament }) {
     const dispatch = useDispatch();
@@ -105,7 +106,7 @@ function Tournament({ tournament }) {
                             id="finished"
                             role="tabpanel"
                         >
-                            Finished todo
+                            {canSeeFinished && <Statistics />}
                         </div>
                     </div>
                 </div>
