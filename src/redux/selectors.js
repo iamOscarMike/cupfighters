@@ -46,7 +46,7 @@ export const getStats = (state) => {
             ? finalMatch.player2
             : finalMatch.playerTroughOnPenalties
         );
-    const runnerUp = finalMatch.player1 === winner ? finalMatch.player2 : finalMatch.player2;
+    const runnerUp = finalMatch.player1 === winner ? finalMatch.player2 : finalMatch.player1;
 
     const semiFinalists = tournament.knockoutRounds[tournament.knockoutRounds.length - 2].matches
         .map((matchId) => (tournament.matches[matchId]))

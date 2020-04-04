@@ -1,0 +1,131 @@
+$gold : #ECA400;
+$silver: #E2E2E2;
+$bronze: #CC511C;
+
+.Statistics {
+    .tournament-standings {
+        .player {
+            font-family: 'Montserrat';
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 2rem;
+        }
+
+        .winner {
+            .trophy {
+                margin-left: auto;
+                margin-right: auto;
+
+                svg {
+                    width: 10rem;
+                    height: 10rem;
+                    fill: $gold;
+                }
+            }
+
+            .player {
+                color: $gold;
+                font-size: 4rem;
+            }
+        }
+
+        .runnerup {
+
+            .trophy {
+                margin-left: auto;
+                margin-right: auto;
+
+                svg {
+                    width: 4rem;
+                    height: 4rem;
+                    fill: $silver;
+                }
+            }
+
+            .player {
+                color: $silver;
+            }
+        }
+
+        .semifinalists {
+
+            .trophy {
+                margin-left: auto;
+                margin-right: auto;
+
+                svg {
+                    width: 4rem;
+                    height: 4rem;
+                    fill: $bronze;
+                }
+            }
+
+            .player {
+                color: $bronze;
+            }
+        }
+    }
+}
+
+// .Statistics {
+//     .tournament-standings {
+
+//         .container {
+
+//             .icon,
+//             .player {
+//                 vertical-align: middle;
+//                 display: inline-block;
+//             }
+
+//             .icon {
+//                 width: 2rem;
+//                 height: 2rem;
+//                 margin-left: 1rem;
+//                 margin-right: 2rem;
+//             }
+
+//             .player {
+//                 font-family: 'Montserrat';
+//                 font-weight: 900;
+//                 text-transform: uppercase;
+//                 font-size: 1.5rem;
+//             }
+//         }
+
+//         .winner {
+//             .icon {
+//                 fill: $gold;
+//                 width: 4rem;
+//                 height: 4rem;
+//                 margin-right: 1rem;
+//                 margin-left: 0;
+//             }
+
+//             .player {
+//                 color: $gold;
+//                 font-size: 3rem;
+//             }
+//         }
+
+//         .runnerup {
+//             span {
+//                 color: $silver;
+//             }
+
+//             svg {
+//                 fill: $silver;
+//             }
+//         }
+
+//         .semifinalists {
+//             span {
+//                 color: $bronze;
+//             }
+
+//             svg {
+//                 fill: $bronze;
+//             }
+//         }
+//     }
+// }
