@@ -18,47 +18,49 @@ const roundComplete = (round, matches) => (
     ))).length === 0
 );
 
-const getRounds = (rounds, matches) => {
+const getRounds = (rounds, matches, readOnly) => {
     const dispatch = useDispatch();
     const roundTitles = { 1: 'Final', 2: 'Semi-finals', 4: 'Quarter-finals' };
     const roundGroupIndicators = { 1: 'F', 2: 'S', 4: 'Q' };
 
-    const roundIndex = rounds.length - 1;
-    const round = rounds[roundIndex];
-    return (
-        <div key={roundIndex} className="row">
-            <div className="col-sm-12">
-                <h2 className="text-center mt-5">
-                    {`${roundTitles[round.matches.length]}`}
-                </h2>
-                <div className="row match-container">
-                    {round.matches.map((match, matchIndex) => (
-                        <Match
-                            allowPenalties={true}
-                            key={`${roundIndex}-${matchIndex}`}
-                            matchId={match}
-                            matchIndicator={roundGroupIndicators[round.matches.length] + (matchIndex + 1)}
-                        />
-                    ))}
-                </div>
+    return rounds.map((round, roundIndex) => {
+        const currentRound = !readOnly && rounds.length - 1 === roundIndex;
+        return (
+            <div key={roundIndex} className={'row ' + (currentRound ? '' : 'd-xl-none')}>
                 <div className="col-sm-12">
-                    <button
-                        type="button"
-                        className="btn btn-outline-primary btn-lg d-block m-auto"
-                        disabled={!roundComplete(round, matches)}
-                        onClick={() => {
-                            dispatch(round.matches.length === 1
-                                ? finishTournament()
-                                : finishKnockoutRound())
-                        }
-                        }
-                    >
-                        {`Finish ${round.matches.length === 1 ? 'tournament' : 'round'}`}
-                    </button>
+                    <h2 className="text-center mt-5">
+                        {`${roundTitles[round.matches.length]}`}
+                    </h2>
+                    <div className="row match-container">
+                        {round.matches.map((match, matchIndex) => (
+                            <Match
+                                allowPenalties={true}
+                                key={`${roundIndex}-${matchIndex}`}
+                                matchId={match}
+                                matchIndicator={roundGroupIndicators[round.matches.length] + (matchIndex + 1)}
+                                readOnly={readOnly}
+                            />
+                        ))}
+                    </div>
+                    <div className="col-sm-12">
+                        {!readOnly && (<button
+                            type="button"
+                            className="btn btn-outline-primary btn-lg d-block m-auto"
+                            disabled={!roundComplete(round, matches)}
+                            onClick={() => {
+                                dispatch(round.matches.length === 1
+                                    ? finishTournament()
+                                    : finishKnockoutRound())
+                            }
+                            }
+                        >
+                            {`Finish ${round.matches.length === 1 ? 'tournament' : 'round'}`}
+                        </button>)}
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        )
+    });
 };
 
 function KnockoutStage() {
@@ -73,7 +75,7 @@ function KnockoutStage() {
             />
 
             <div className="col-sm-12 col-md-10 offset-md-1">
-                {!readOnly && getRounds(tournament.knockoutRounds, tournament.matches)}
+                {getRounds(tournament.knockoutRounds, tournament.matches, readOnly)}
             </div>
         </div>
     );

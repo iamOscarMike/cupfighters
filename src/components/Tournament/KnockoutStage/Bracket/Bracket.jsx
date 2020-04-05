@@ -89,7 +89,7 @@ const getColumns = (matches, players, rounds) => {
 
 function Bracket({ matches, players, rounds }) {
     return (
-        <div className="Bracket">
+        <div className="Bracket d-none d-xl-block">
             <div className="row">
                 {getColumns(matches, players, rounds)}
             </div>
