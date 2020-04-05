@@ -35,6 +35,8 @@ describe('Statistics', () => {
                 averageGoalsPerMatch: 2,
                 numberOfCleanSheets: 6,
                 numberOfLittleJohns: 6,
+                biggestWin: 'match#1',
+                highestScoringMatch: 'match#2',
             }));
 
         const statistics = shallow(<Statistics />);

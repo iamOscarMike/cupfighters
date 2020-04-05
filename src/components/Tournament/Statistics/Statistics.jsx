@@ -13,11 +13,14 @@ import {
 } from '@mdi/js';
 import './Statistics.scss';
 import confetti from "canvas-confetti";
+import Match from "../../Match/Match";
 
 function Statistics() {
     const tournament = useSelector((state) => (getActiveTournament(state)))
     const players = tournament.players;
     const stats = useSelector((state) => (getStats(state)));
+
+    console.log(stats);
 
     useEffect(() => {
         const end = Date.now() + (5000);
@@ -234,6 +237,34 @@ function Statistics() {
                         </div>
                         <div className="description text-center">
                             Total&nbsp;Little&nbsp;Johns<br />(humiliating&nbsp;3&#8209;0&nbsp;victory)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="tournament-matches mb-5">
+                <div className="row">
+                    <div className="col-sm-12 col-md-4 offset-md-2">
+                        <h3 className="text-center">Biggest win</h3>
+
+                        <div className="row match-container">
+                            <Match
+                                matchId={stats.biggestWin}
+                                readOnly={true}
+                                fullWidth={true}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="col-sm-12 col-md-4">
+                        <h3 className="text-center">Highest scoring match</h3>
+
+                        <div className="row match-container">
+                            <Match
+                                matchId={stats.highestScoringMatch}
+                                readOnly={true}
+                                fullWidth={true}
+                            />
                         </div>
                     </div>
                 </div>

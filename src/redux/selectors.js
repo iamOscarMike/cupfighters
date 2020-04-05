@@ -44,7 +44,7 @@ export const getStats = (state) => {
         ? finalMatch.player1
         : (finalMatch.score2 > finalMatch.score1
             ? finalMatch.player2
-            : finalMatch.playerTroughOnPenalties
+            : finalMatch.throughOnPenalties
         );
     const runnerUp = finalMatch.player1 === winner ? finalMatch.player2 : finalMatch.player1;
 
@@ -134,6 +134,37 @@ export const getStats = (state) => {
         .filter((match) => ((match.score1 >= 3 && match.score2 === 0) || (match.score2 >= 3 && match.score1 === 0)))
         .length;
 
+    const biggestWin = Object.entries(tournament.matches).sort((match1, match2) => {
+        const match1GoalDifference = Math.abs(match1[1].score1 - match1[1].score2);
+        const match2GoalDifference = Math.abs(match2[1].score1 - match2[1].score2);
+
+        if (match1GoalDifference !== match2GoalDifference) {
+            return match1GoalDifference < match2GoalDifference ? 1 : -1;
+        }
+
+        const match1MaxScore = Math.max(match1[1].score1, match1[1].score2);
+        const match2MaxScore = Math.max(match2[1].score1, match2[1].score2);
+
+        if (match1MaxScore !== match2MaxScore) {
+            return match1MaxScore < match2MaxScore ? 1 : -1;
+        }
+
+        const matchIndexes = Object.keys(tournament.matches);
+        return matchIndexes.indexOf(match2[0]) - matchIndexes.indexOf(match1[0]);
+    })[0][0];
+
+    const highestScoringMatch = Object.entries(tournament.matches).sort((match1, match2) => {
+        const match1Goals = match1[1].score1 + match1[1].score2;
+        const match2Goals = match2[1].score1 + match2[1].score2;
+
+        if (match1Goals !== match2Goals) {
+            return match1Goals < match2Goals ? 1 : -1;
+        }
+
+        const matchIndexes = Object.keys(tournament.matches);
+        return matchIndexes.indexOf(match2[0]) - matchIndexes.indexOf(match1[0]);
+    })[0][0];
+
     return {
         winner,
         runnerUp,
@@ -146,5 +177,7 @@ export const getStats = (state) => {
         averageGoalsPerMatch,
         numberOfCleanSheets,
         numberOfLittleJohns,
+        biggestWin,
+        highestScoringMatch,
     };
 }

@@ -9,6 +9,7 @@ import './Match.scss'
 
 function Match({
     allowPenalties,
+    fullWidth,
     matchId,
     matchIndicator,
     readOnly,
@@ -51,9 +52,9 @@ function Match({
     }
 
     return (
-        <div className="Match col-sm-12 col-md-6">
+        <div className={`Match col-sm-12${fullWidth ? '' : ' col-md-6'}`}>
             <div className="p-4 m-3 background-dark">
-                <div className="match-indicator text-center">{matchIndicator}</div>
+                {matchIndicator && <div className="match-indicator text-center">{matchIndicator}</div>}
                 <div className="row score-container">
                     <div className="col-sm-6 form-inline container-player1">
                         <div className="label-container">
@@ -115,13 +116,16 @@ function Match({
 
 Match.propTypes = {
     allowPenalties: PropTypes.bool,
+    fullWidth: PropTypes.bool,
     matchId: PropTypes.string.isRequired,
-    matchIndicator: PropTypes.string.isRequired,
+    matchIndicator: PropTypes.string,
     readOnly: PropTypes.bool,
 };
 
 Match.defaultProps = {
     allowPenalties: false,
+    fullWidth: false,
+    matchIndicator: null,
     readOnly: false,
 };
 

@@ -251,5 +251,7 @@ describe('getStats', () => {
         expect(stats.averageGoalsPerMatch).toEqual(2.9);
         expect(stats.numberOfCleanSheets).toEqual(6);
         expect(stats.numberOfLittleJohns).toEqual(0);
+        expect(stats.biggestWin).toEqual('match#4');
+        expect(stats.highestScoringMatch).toEqual('match#15');
     });
 });
