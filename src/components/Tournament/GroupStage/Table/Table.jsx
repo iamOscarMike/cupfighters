@@ -24,8 +24,8 @@ function Table({ stats, playersThrough, playersBestThird }) {
                     <th scope="col" className="text-right">W</th>
                     <th scope="col" className="text-right">D</th>
                     <th scope="col" className="text-right">L</th>
-                    <th scope="col" className="text-right">GF</th>
-                    <th scope="col" className="text-right">GA</th>
+                    <th scope="col" className="text-right d-none d-sm-table-cell">GF</th>
+                    <th scope="col" className="text-right d-none d-sm-table-cell">GA</th>
                     <th scope="col" className="text-right">GD</th>
                     <th scope="col" className="text-right">Points</th>
                 </tr>
@@ -40,8 +40,8 @@ function Table({ stats, playersThrough, playersBestThird }) {
                         <td key={`${player.player}-won`} className="text-right">{player.won}</td>
                         <td key={`${player.player}-draw`} className="text-right">{player.draw}</td>
                         <td key={`${player.player}-lost`} className="text-right">{player.lost}</td>
-                        <td key={`${player.player}-goalsFor`} className="text-right">{player.goalsFor}</td>
-                        <td key={`${player.player}-goalsAgainst`} className="text-right">{player.goalsAgainst}</td>
+                        <td key={`${player.player}-goalsFor`} className="text-right d-none d-sm-table-cell">{player.goalsFor}</td>
+                        <td key={`${player.player}-goalsAgainst`} className="text-right d-none d-sm-table-cell">{player.goalsAgainst}</td>
                         <td key={`${player.player}-goalDifference`} className="text-right">{player.goalDifference}</td>
                         <td key={`${player.player}-points`} className="text-right">{player.points}</td>
                     </tr>
