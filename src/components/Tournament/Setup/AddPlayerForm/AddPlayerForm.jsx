@@ -32,10 +32,10 @@ function AddPlayerForm({ players, maxPlayersReached, addPlayerCallback, input, s
     return (
         <form className="AddPlayerForm" onSubmit={handleAddPlayer}>
             <div className="row">
-                <div className="col-sm-12 col-md-6 offset-md-3">
+            <div className="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
                     <div className="form-group row">
                         <label htmlFor="addPlayer" className="col-sm-3 col-form-label">Player</label>
-                        <div className="col-sm-7">
+                        <div className="col-9 col-sm-7">
                             <input
                                 type="text"
                                 className={'form-control' + (invalidFeedback ? ' is-invalid' : '')}
@@ -46,7 +46,7 @@ function AddPlayerForm({ players, maxPlayersReached, addPlayerCallback, input, s
                             />
                             <div className="invalid-feedback">{invalidFeedback}</div>
                         </div>
-                        <div className="col-sm-2">
+                        <div className="col-3 col-sm-2">
                             <button
                                 type="submit"
                                 className="btn btn-primary float-right"

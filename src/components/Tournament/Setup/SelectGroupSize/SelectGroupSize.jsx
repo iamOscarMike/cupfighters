@@ -18,7 +18,7 @@ function SelectGroupSize({ players, setGroupSize }) {
 
     return (
         <div className="SelectGroupSize row">
-            <div className="col-sm-12 col-md-6 offset-md-3">
+            <div className="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
                 <div className="form-group row">
                     <label htmlFor="groupSize" className="col-sm-3 col-form-label">Group size</label>
                     <div className="col-sm-9">
