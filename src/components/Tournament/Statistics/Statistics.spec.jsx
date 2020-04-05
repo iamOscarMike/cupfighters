@@ -33,6 +33,8 @@ describe('Statistics', () => {
                 numberOfMatches: 16,
                 numberOfGoals: 32,
                 averageGoalsPerMatch: 2,
+                numberOfCleanSheets: 6,
+                numberOfLittleJohns: 6,
             }));
 
         const statistics = shallow(<Statistics />);

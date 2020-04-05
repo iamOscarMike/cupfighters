@@ -9,6 +9,7 @@ import {
     mdiHand,
     mdiSoccerField,
     mdiSoccer,
+    mdiEmoticonCryOutline,
 } from '@mdi/js';
 import './Statistics.scss';
 import confetti from "canvas-confetti";
@@ -166,12 +167,12 @@ function Statistics() {
             </div>
 
             <div className="tournament-stats">
-                <div className="row">
+                <div className="row mb-3">
                     <div className="col-sm-12">
                         <h3 className="text-center">Statistics</h3>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row mb-5">
 
                     <div className="col-sm-12 col-lg-2 offset-lg-2 tournament-stat">
                         <div className="number text-center">
@@ -209,6 +210,32 @@ function Statistics() {
                         </div>
                     </div>
 
+                </div>
+                <div className="row mb-5">
+
+                    <div className="col-sm-12 col-lg-3 offset-lg-3 tournament-stat">
+                        <div className="number text-center">
+                            {stats.numberOfCleanSheets}
+                        </div>
+                        <div className="icon">
+                            <Icon path={mdiHand} />
+                        </div>
+                        <div className="description text-center">
+                            Total Clean&nbsp;sheets
+                        </div>
+                    </div>
+
+                    <div className="col-sm-12 col-lg-3 tournament-stat">
+                        <div className="number text-center">
+                            {stats.numberOfLittleJohns}
+                        </div>
+                        <div className="icon">
+                            <Icon path={mdiEmoticonCryOutline} />
+                        </div>
+                        <div className="description text-center">
+                            Little&nbsp;Johns (humiliating&nbsp;3&#8209;0&nbsp;victory)
+                        </div>
+                    </div>
                 </div>
             </div>
 

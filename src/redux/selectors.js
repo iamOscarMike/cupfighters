@@ -127,6 +127,13 @@ export const getStats = (state) => {
         .reduce((totalGoals, goals) => (totalGoals + goals));
     const averageGoalsPerMatch = Number(Math.round((numberOfGoals / numberOfMatches) + 'e1') + 'e-1');
 
+    const numberOfCleanSheets = Object.values(playerStats)
+        .map((player) => (player.cleanSheets))
+        .reduce((totalCleanSheets, cleanSheets) => (totalCleanSheets + cleanSheets));
+    const numberOfLittleJohns = Object.values(tournament.matches)
+        .filter((match) => ((match.score1 >= 3 && match.score2 === 0) || (match.score2 >= 3 && match.score1 === 0)))
+        .length;
+
     return {
         winner,
         runnerUp,
@@ -137,5 +144,7 @@ export const getStats = (state) => {
         numberOfMatches,
         numberOfGoals,
         averageGoalsPerMatch,
+        numberOfCleanSheets,
+        numberOfLittleJohns,
     };
 }

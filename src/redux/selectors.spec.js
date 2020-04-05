@@ -249,5 +249,7 @@ describe('getStats', () => {
         expect(stats.numberOfMatches).toEqual(15);
         expect(stats.numberOfGoals).toEqual(44);
         expect(stats.averageGoalsPerMatch).toEqual(2.9);
+        expect(stats.numberOfCleanSheets).toEqual(6);
+        expect(stats.numberOfLittleJohns).toEqual(0);
     });
 });
