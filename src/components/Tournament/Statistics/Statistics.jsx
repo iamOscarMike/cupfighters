@@ -20,8 +20,6 @@ function Statistics() {
     const players = tournament.players;
     const stats = useSelector((state) => (getStats(state)));
 
-    console.log(stats);
-
     useEffect(() => {
         const end = Date.now() + (5000);
         const colors = ['#FF6F59', '#FDCA40'];
