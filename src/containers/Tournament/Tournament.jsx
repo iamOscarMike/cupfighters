@@ -23,18 +23,6 @@ function Tournament({ tournament }) {
 
     return (
         <div className="Tournament">
-            <div className="row logo-container">
-                <div className="m-auto logo-small">
-                    <img className="logo float-left" src="/images/cupfighters.svg" />
-                    <span className="logo-text heading text-primary">Cup Fighters</span>
-                </div>
-            </div>
-
-            <div className="row header-container">
-                <div className="m-auto">
-                    <h1 className="text-primary">{tournament.title}</h1>
-                </div>
-            </div>
 
             <button className="btn btn-link back" onClick={() => dispatch(unsetActiveTournament())}>
                 <Icon
@@ -43,6 +31,19 @@ function Tournament({ tournament }) {
                     color="#85ffc7"
                 />
             </button>
+
+            <div className="row logo-container">
+                <div className="m-auto logo-small">
+                    <img className="logo float-left" src="/images/cupfighters.svg" />
+                    <span className="logo-text heading text-primary">Cup Fighters</span>
+                </div>
+            </div>
+
+            <div className="row header-container">
+                <div className="col text-center">
+                    <h1 className="text-primary">{tournament.title}</h1>
+                </div>
+            </div>
 
             {tournament.stage === stages.setup && <Setup />}
 
