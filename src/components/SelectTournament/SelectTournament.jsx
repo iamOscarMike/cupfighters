@@ -26,7 +26,7 @@ function SelectTournament() {
                         {
                             tournaments.map(({ tournamentId, title }) => (
                                 <li className="list-group-item tournament" key={tournamentId}>
-                                    {title}
+                                    <span className="title">{title}</span>
                                     
                                     <button
                                         className="btn btn-secondary btn-sm float-right ml-2"

@@ -30,4 +30,29 @@
         font-weight: 900;
         line-height: 2rem;
     }
+
+    @media (max-width: 767px) {
+        .header-container {
+            img.logo {
+                height: 4rem;
+                margin-right: 0.67rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+        }
+
+        li.tournament {
+            .title {
+                display: block;
+            }
+
+            button {
+                width: 50%;
+                margin: 0 !important;
+            }
+        }
+    }
 }
