@@ -49,7 +49,7 @@ function Tournament({ tournament }) {
             {canSeeGroupStage &&
                 <div>
                     <ul className="row nav nav-tabs" id="tournamentTab" role="tablist">
-                        <li className="nav-item col-4 text-center">
+                        <li className="nav-item col-12 col-sm-4 pl-0 pr-0 text-center">
                             <a
                                 className={'nav-link' + (isInGroupStage ? ' active' : '')}
                                 data-toggle="tab"
@@ -57,9 +57,9 @@ function Tournament({ tournament }) {
                                 role="tab"
                             >
                                 Groups
-                    </a>
+                             </a>
                         </li>
-                        <li className="nav-item col-4 text-center">
+                        <li className="nav-item col-12 col-sm-4 pl-0 pr-0 text-center">
                             <a
                                 className={'nav-link' + (isInKnockoutStage
                                     ? ' active'
@@ -70,9 +70,9 @@ function Tournament({ tournament }) {
                                 role="tab"
                             >
                                 Knock-out
-                    </a>
+                            </a>
                         </li>
-                        <li className="nav-item col-4 text-center">
+                        <li className="nav-item col-12 col-sm-4 pl-0 pr-0 text-center">
                             <a
                                 className={'nav-link' + (isInFinished
                                     ? ' active'
@@ -83,7 +83,7 @@ function Tournament({ tournament }) {
                                 role="tab"
                             >
                                 Statistics
-                    </a>
+                            </a>
                         </li>
                     </ul>
                     <div className="tab-content" id="tournamentTabContent">
