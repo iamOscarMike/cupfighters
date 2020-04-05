@@ -52,7 +52,13 @@ function GroupStage() {
 
                     <div className="row">
                         {tournament.groups.map((group, index) => (
-                            <div key={index} className="col-md-6">
+                            <div
+                                key={index}
+                                className={
+                                    'col-sm-12 col-lg-8 offset-lg-2 col-xl-6'
+                                    + (tournament.groups.length % 2 !== 0 && index === 0 ? ' offset-xl-3' : ' offset-xl-0')
+                                }
+                            >
                                 <h3>{`Group ${String.fromCharCode(97 + index)}`}</h3>
                                 <Table
                                     stats={groupStats[index]}
