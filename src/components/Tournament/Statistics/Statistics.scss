@@ -69,6 +69,10 @@ $bronze: #CC511C;
 
     table {
 
+        th {
+            vertical-align: middle !important;
+        }
+
         td:not(:first-child),
         th:not(:first-child) {
             text-align: right;

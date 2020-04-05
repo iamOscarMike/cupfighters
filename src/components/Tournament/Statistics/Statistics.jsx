@@ -97,7 +97,7 @@ function Statistics() {
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Games</th>
+                                    <th>Games played</th>
                                     <th>Goals</th>
                                     <th>+/-</th>
                                 </tr>
@@ -132,8 +132,8 @@ function Statistics() {
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>CS</th>
-                                    <th>GA</th>
+                                    <th>Clean sheets</th>
+                                    <th>Goals against</th>
                                 </tr>
                             </thead>
                             <tbody>
