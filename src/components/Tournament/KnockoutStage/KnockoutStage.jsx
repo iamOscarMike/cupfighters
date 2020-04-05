@@ -35,6 +35,7 @@ const getRounds = (rounds, matches, readOnly) => {
                         {round.matches.map((match, matchIndex) => (
                             <Match
                                 allowPenalties={true}
+                                className={`group-${roundIndex + 1}`}
                                 key={`${roundIndex}-${matchIndex}`}
                                 matchId={match}
                                 matchIndicator={roundGroupIndicators[round.matches.length] + (matchIndex + 1)}

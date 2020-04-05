@@ -1,3 +1,8 @@
+$group-1: #85FFC7;
+$group-2: #D9EA23;
+$group-3: #FB5012;
+$group-4: #139C9A;
+
 .GroupStage {
     .match-container {
         margin-top: 2rem !important;
@@ -7,5 +12,18 @@
                 margin-top: -2rem !important;
             }
         }
+    }
+
+    .group-1 h3 {
+        color: $group-1;
+    }
+    .group-2 h3 {
+        color: $group-2;
+    }
+    .group-3 h3 {
+        color: $group-3;
+    }
+    .group-4 h3 {
+        color: $group-4;
     }
 }

@@ -36,6 +36,7 @@ function GroupStage() {
             for (j = 0; j < numberOfGroups; j++) {
                 elements.push(<Match
                     key={`${j}-${i}`}
+                    className={`group-${j + 1}`}
                     matchId={tournament.groups[j].matches[i]}
                     matchIndicator={String.fromCharCode(97 + j) + (i + 1)}
                     readOnly={readOnly}
@@ -56,6 +57,7 @@ function GroupStage() {
                                 key={index}
                                 className={
                                     'col-sm-12 col-lg-8 offset-lg-2 col-xl-6'
+                                    + ` group-${index + 1}`
                                     + (tournament.groups.length % 2 !== 0 && index === 0 ? ' offset-xl-3' : ' offset-xl-0')
                                 }
                             >

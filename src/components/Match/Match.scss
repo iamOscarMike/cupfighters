@@ -1,4 +1,10 @@
+$group-1: #85FFC7;
+$group-2: #D9EA23;
+$group-3: #FB5012;
+$group-4: #139C9A;
+
 .Match {
+
     .background-dark {
         background-color: #222A4C;
     }
@@ -72,6 +78,23 @@
             }
         }
     }
+
+    &.group-1 .match-indicator {
+        background-color: $group-1;
+    }
+
+    &.group-2 .match-indicator {
+        background-color: $group-2;
+    }
+
+    &.group-3 .match-indicator {
+        background-color: $group-3;
+    }
+
+    &.group-4 .match-indicator {
+        background-color: $group-4;
+    }
+
 
     @media (max-width: 576px) {
         .score-container {

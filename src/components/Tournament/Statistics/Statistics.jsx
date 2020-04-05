@@ -22,7 +22,7 @@ function Statistics() {
 
     useEffect(() => {
         const end = Date.now() + (5000);
-        const colors = ['#FF6F59', '#FDCA40'];
+        const colors = ['#85FFC7', '#FB5012'];
         (function frame() {
             confetti({
                 particleCount: 2,
