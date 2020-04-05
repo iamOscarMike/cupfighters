@@ -7,13 +7,14 @@
         position: absolute;
         top: 1rem;
         left: 2rem;
-        padding: .5rem;
+        padding: .25rem;
         background-color: #85ffc7;
         color: #29335c;
         font-family: 'Montserrat';
         font-weight: 900;
         text-transform: uppercase;
         min-width: 3rem;
+        font-size: .75rem;
     }
 
     .score-container {
@@ -68,6 +69,67 @@
 
             label {
                 font-weight: 700;
+            }
+        }
+    }
+
+    @media (max-width: 576px) {
+        .score-container {
+            text-align: center !important;
+
+            .label-container {
+                width: 100%;
+            }
+
+            .container-player1,
+            .container-player2 {
+                display: block;
+            }
+
+            .container-player1 {
+                margin-bottom: 1rem;
+            }
+
+            label {
+                margin-top: 0.5rem;
+            }
+
+            input {
+                position: relative;
+            }
+
+            .container-player1 {
+                input {
+                    right: 3rem;
+                }
+
+                button.button-penalty {
+                    position: relative;
+                    right: 2rem;
+                    z-index: 999;
+                    top: -1.25rem;
+                }
+            }
+
+            .container-player2 {
+                height: 1.5rem;
+
+                input {
+                    left: 3rem;
+                    bottom: calc(1.5em + 0.75rem + 2px + 1rem);
+                }
+
+                .label-container {
+                    position: relative;
+                    bottom: calc(1.5em + 0.75rem + 2px + 1rem);
+                }
+
+                button.button-penalty {
+                    position: relative;
+                    left: 2rem;
+                    z-index: 999;
+                    top: calc((1.5em + 2px + 3rem)*-1);
+                }
             }
         }
     }

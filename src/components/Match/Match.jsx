@@ -52,11 +52,11 @@ function Match({
     }
 
     return (
-        <div className={`Match col-sm-12${fullWidth ? '' : ' col-md-6'}`}>
+        <div className={`Match col-sm-12${fullWidth ? '' : ' col-xl-6'}`}>
             <div className="p-4 m-3 background-dark">
                 {matchIndicator && <div className="match-indicator text-center">{matchIndicator}</div>}
                 <div className="row score-container">
-                    <div className="col-sm-6 form-inline container-player1">
+                    <div className="col-sm-6 ml-0 form-inline container-player1">
                         <div className="label-container">
                             <label htmlFor={`${matchId}-player1`}>{player1}</label>
                         </div>
@@ -82,7 +82,7 @@ function Match({
                             disabled={readOnly}
                         />
                     </div>
-                    <div className="col-sm-6 form-inline container-player2">
+                    <div className="col-sm-6 mr-0 form-inline container-player2">
                         <input
                             className="form-control text-center"
                             id={`${matchId}-player2`}
