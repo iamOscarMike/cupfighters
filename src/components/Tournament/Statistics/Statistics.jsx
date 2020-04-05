@@ -99,7 +99,7 @@ function Statistics() {
 
             <div className="tournament-awards mb-5">
                 <div className="row golden-boot">
-                    <div className="col-sm-12 col-md-4 offset-md-2">
+                    <div className="col-sm-12 col-lg-5 offset-lg-1 col-xl-4 offset-xl-2">
                         <h3 className="text-center">Golden boot</h3>
 
                         <table className="table group table-lg">
@@ -134,7 +134,7 @@ function Statistics() {
                         </table>
                     </div>
 
-                    <div className="col-sm-12 col-md-4">
+                    <div className="col-sm-12 col-lg-5 col-xl-4">
                         <h3 className="text-center">Golden glove</h3>
 
                         <table className="table group table-lg">
@@ -173,9 +173,9 @@ function Statistics() {
                         <h3 className="text-center">Statistics</h3>
                     </div>
                 </div>
-                <div className="row mb-5">
+                <div className="row mb-lg-5">
 
-                    <div className="col-sm-12 col-lg-2 offset-lg-2 tournament-stat">
+                    <div className="col-12 col-sm-6 col-lg-2 offset-lg-2 tournament-stat">
                         <div className="number text-center">
                             {stats.numberOfMatches}
                         </div>
@@ -187,7 +187,7 @@ function Statistics() {
                         </div>
                     </div>
 
-                    <div className="col-sm-12 col-lg-2 offset-lg-1 tournament-stat">
+                    <div className="col-12 col-sm-6 col-lg-2 offset-lg-1 tournament-stat">
                         <div className="number text-center">
                             {stats.numberOfGoals}
                         </div>
@@ -199,7 +199,7 @@ function Statistics() {
                         </div>
                     </div>
 
-                    <div className="col-sm-12 col-lg-2 offset-lg-1 tournament-stat">
+                    <div className="col-12 col-sm-6 offset-sm-3 col-lg-2 offset-lg-1 tournament-stat">
                         <div className="number text-center">
                             {stats.averageGoalsPerMatch}
                         </div>
@@ -214,7 +214,7 @@ function Statistics() {
                 </div>
                 <div className="row mb-5">
 
-                    <div className="col-sm-12 col-lg-3 offset-lg-3 tournament-stat">
+                    <div className="col-12 col-sm-6 col-lg-3 offset-lg-3 tournament-stat">
                         <div className="number text-center">
                             {stats.numberOfCleanSheets}
                         </div>
@@ -226,7 +226,7 @@ function Statistics() {
                         </div>
                     </div>
 
-                    <div className="col-sm-12 col-lg-3 tournament-stat">
+                    <div className="col-12 col-sm-6 col-lg-3 tournament-stat">
                         <div className="number text-center">
                             {stats.numberOfLittleJohns}
                         </div>
@@ -242,24 +242,26 @@ function Statistics() {
 
             <div className="tournament-matches mb-5">
                 <div className="row">
-                    <div className="col-sm-12 col-md-4 offset-md-2">
+                    <div className="col-sm-12 col-lg-6 col-xl-4 offset-xl-2">
                         <h3 className="text-center">Biggest win</h3>
 
                         <div className="row match-container">
                             <Match
                                 matchId={stats.biggestWin}
+                                allowPenalties={true}
                                 readOnly={true}
                                 fullWidth={true}
                             />
                         </div>
                     </div>
 
-                    <div className="col-sm-12 col-md-4">
+                    <div className="col-sm-12 col-lg-6 col-xl-4">
                         <h3 className="text-center">Highest scoring match</h3>
 
                         <div className="row match-container">
                             <Match
                                 matchId={stats.highestScoringMatch}
+                                allowPenalties={true}
                                 readOnly={true}
                                 fullWidth={true}
                             />
