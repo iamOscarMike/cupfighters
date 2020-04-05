@@ -56,7 +56,7 @@ function Statistics() {
 
                 <div className="row text-center">
                     <div className="col-12 mb-3">
-                        <h2>Tournament standings</h2>
+                        <h3>Tournament standings</h3>
                     </div>
                 </div>
                 <div className="row text-center winner">

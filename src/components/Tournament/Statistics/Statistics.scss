@@ -9,7 +9,6 @@ $bronze: #CC511C;
             font-family: 'Montserrat';
             font-weight: 900;
             text-transform: uppercase;
-            font-size: 2rem;
         }
 
         .winner {
@@ -64,6 +63,7 @@ $bronze: #CC511C;
 
             .player {
                 color: $bronze;
+                font-size: 2rem;
             }
         }
     }
@@ -121,6 +121,21 @@ $bronze: #CC511C;
 
         &.bronze {
             fill: $bronze;
+        }
+    }
+
+    @media (max-width: 767px) {
+
+        .winner .player {
+            font-size: 2rem !important;
+        }
+
+        .runnerup .player {
+            font-size: 1.5rem !important;
+        }
+
+        .semifinalists .player {
+            font-size: 1rem !important;
         }
     }
 }
