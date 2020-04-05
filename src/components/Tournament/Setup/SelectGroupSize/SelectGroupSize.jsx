@@ -4,7 +4,7 @@ function SelectGroupSize({ players, setGroupSize }) {
 
     const getOptions = () => {
         const groupSizes = ([...Array(players.length).keys()]).filter((playerIndex) => (
-            players.length % playerIndex === 0 && playerIndex !== 1
+            players.length % playerIndex === 0 && playerIndex !== 1 && playerIndex !== 2
         ));
         const options = groupSizes.map(groupSize => (
             <option key={groupSize} value={groupSize}>

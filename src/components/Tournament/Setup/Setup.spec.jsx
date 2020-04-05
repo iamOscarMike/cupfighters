@@ -90,6 +90,10 @@ describe('Setup', () => {
         addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
         addPlayerForm.find('input').simulate('change', { target: { value: 'van Gastel' } });
         addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
+        addPlayerForm.find('input').simulate('change', { target: { value: 'van Gobbel' } });
+        addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
+        addPlayerForm.find('input').simulate('change', { target: { value: 'Kalou' } });
+        addPlayerForm.find('form').simulate('submit', { preventDefault() { } });
 
         const selectPlayersInKnockout = setup.find(SelectPlayersInKnockout);
         selectPlayersInKnockout.find('option').at(0).instance().selected = false;
@@ -113,9 +117,11 @@ describe('Setup', () => {
                     'Shinji Ono',
                     'Kiprich',
                     'van Gastel',
+                    'van Gobbel',
+                    'Kalou',
                 ],
-                amountOfPlayersInKnockout: 2,
-                groupSize: 2,
+                amountOfPlayersInKnockout: 4,
+                groupSize: 3,
             }
         });
     });

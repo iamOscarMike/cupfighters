@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function SelectPlayersInKnockout({ players, setamountOfPlayersInKnockout }) {
     const getOptions = () => {
-        const amountsOfPlayers = ([2, 4, 8]).filter((amount) => (amount < players.length));
+        const amountsOfPlayers = ([4, 8]).filter((amount) => (amount < players.length));
         const options = amountsOfPlayers.map((amount) => (
             <option key={amount} value={amount}>{amount} players</option>
         ));

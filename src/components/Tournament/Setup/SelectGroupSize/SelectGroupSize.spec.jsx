@@ -24,9 +24,11 @@ describe('SelectGroupSize', () => {
                 'Robin van Persie',
                 'Pierre van Hooijdonk',
                 'Peter Houtman',
+                'Joseph Kiprich',
+                'Ulrich van Gobbel',
             ]}
         />);
-        expect(selectGroupSize.find('option').at(1).text()).toEqual('2 players per group, 2 groups');
+        expect(selectGroupSize.find('option').at(1).text()).toEqual('3 players per group, 2 groups');
     });
 
     it('it calls setGroupSize on change', () => {
@@ -37,12 +39,14 @@ describe('SelectGroupSize', () => {
                 'Robin van Persie',
                 'Pierre van Hooijdonk',
                 'Peter Houtman',
+                'Joseph Kiprich',
+                'Ulrich van Gobbel',
             ]}
         />);
 
         selectGroupSize.find('option').at(0).instance().selected = false;
         selectGroupSize.find('option').at(1).instance().selected = true;
         selectGroupSize.find('select').simulate('change');
-        expect(mockSetGroupSize).toBeCalledWith('2');
+        expect(mockSetGroupSize).toBeCalledWith('3');
     });
 });
