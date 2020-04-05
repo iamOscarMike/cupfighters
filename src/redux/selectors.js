@@ -121,6 +121,12 @@ export const getStats = (state) => {
         .map((player) => (player.player))
         .slice(0, 3);
 
+    const numberOfMatches = Object.keys(tournament.matches).length;
+    const numberOfGoals = Object.values(playerStats)
+        .map((player) => (player.goalsFor))
+        .reduce((totalGoals, goals) => (totalGoals + goals));
+    const averageGoalsPerMatch = Number(Math.round((numberOfGoals / numberOfMatches) + 'e1') + 'e-1');
+
     return {
         winner,
         runnerUp,
@@ -128,5 +134,8 @@ export const getStats = (state) => {
         playerStats,
         goldenBoot,
         goldenGlove,
+        numberOfMatches,
+        numberOfGoals,
+        averageGoalsPerMatch,
     };
 }

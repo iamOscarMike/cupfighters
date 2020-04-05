@@ -2,7 +2,14 @@ import React, { useEffect } from "react";
 import { getStats, getActiveTournament } from "../../../redux/selectors";
 import { useSelector } from "react-redux";
 import Icon from '@mdi/react';
-import { mdiTrophy, mdiMedal, mdiBullseyeArrow, mdiHand } from '@mdi/js';
+import {
+    mdiTrophy,
+    mdiMedal,
+    mdiBullseyeArrow,
+    mdiHand,
+    mdiSoccerField,
+    mdiSoccer,
+} from '@mdi/js';
 import './Statistics.scss';
 import confetti from "canvas-confetti";
 
@@ -88,7 +95,7 @@ function Statistics() {
                 </div>
             </div>
 
-            <div className="tournament-awards">
+            <div className="tournament-awards mb-5">
                 <div className="row golden-boot">
                     <div className="col-sm-12 col-md-4 offset-md-2">
                         <h3 className="text-center">Golden boot</h3>
@@ -155,6 +162,53 @@ function Statistics() {
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+
+            <div className="tournament-stats">
+                <div className="row">
+                    <div className="col-sm-12">
+                        <h3 className="text-center">Statistics</h3>
+                    </div>
+                </div>
+                <div className="row">
+
+                    <div className="col-sm-12 col-lg-2 offset-lg-2 tournament-stat">
+                        <div className="number text-center">
+                            {stats.numberOfMatches}
+                        </div>
+                        <div className="icon">
+                            <Icon path={mdiSoccerField} />
+                        </div>
+                        <div className="description text-center">
+                            Number&nbsp;of matches&nbsp;played
+                        </div>
+                    </div>
+
+                    <div className="col-sm-12 col-lg-2 offset-lg-1 tournament-stat">
+                        <div className="number text-center">
+                            {stats.numberOfGoals}
+                        </div>
+                        <div className="icon">
+                            <Icon path={mdiBullseyeArrow} />
+                        </div>
+                        <div className="description text-center">
+                            Number&nbsp;of goals&nbsp;scored
+                        </div>
+                    </div>
+
+                    <div className="col-sm-12 col-lg-2 offset-lg-1 tournament-stat">
+                        <div className="number text-center">
+                            {stats.averageGoalsPerMatch}
+                        </div>
+                        <div className="icon">
+                            <Icon path={mdiSoccer} />
+                        </div>
+                        <div className="description text-center">
+                            Average&nbsp;goals per&nbsp;game
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

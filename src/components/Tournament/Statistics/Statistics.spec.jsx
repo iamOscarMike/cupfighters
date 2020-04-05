@@ -29,7 +29,10 @@ describe('Statistics', () => {
                     ['player#2']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0, cleanSheets: 0 },
                     ['player#3']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0, cleanSheets: 0 },
                     ['player#4']: { played: 0, won: 0, draw: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDifference: 0, cleanSheets: 0 },
-                }
+                },
+                numberOfMatches: 16,
+                numberOfGoals: 32,
+                averageGoalsPerMatch: 2,
             }));
 
         const statistics = shallow(<Statistics />);
