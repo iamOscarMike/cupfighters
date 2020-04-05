@@ -233,7 +233,7 @@ function Statistics() {
                             <Icon path={mdiEmoticonCryOutline} />
                         </div>
                         <div className="description text-center">
-                            Little&nbsp;Johns (humiliating&nbsp;3&#8209;0&nbsp;victory)
+                            Total&nbsp;Little&nbsp;Johns<br />(humiliating&nbsp;3&#8209;0&nbsp;victory)
                         </div>
                     </div>
                 </div>
