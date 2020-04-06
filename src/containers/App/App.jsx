@@ -14,11 +14,6 @@ function App() {
                     ? <Tournament tournament={tournament} />
                     : <SelectTournament />
             }
-            <div className="row">
-                <div className="col-12 text-center">
-                    <p className="copyright">&copy; {(new Date()).getFullYear()} Thomas Kamermans</p>
-                </div>
-            </div>
         </div>
     );
 };
