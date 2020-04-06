@@ -9,7 +9,7 @@ function SelectPlayersInKnockout({ players, setamountOfPlayersInKnockout }) {
         ));
         return options.length
             ? options
-            : <option value={null}>Unable to pick amount with {players.length} players</option>;
+            : <option value="">Unable to pick amount with {players.length} players</option>;
     };
 
     return (
@@ -19,7 +19,7 @@ function SelectPlayersInKnockout({ players, setamountOfPlayersInKnockout }) {
                     <label htmlFor="knockout" className="col-sm-3 col-form-label">Amount in knock out</label>
                     <div className="col-sm-9">
                         <select id="knockout" className="form-control" onChange={(event) => { setamountOfPlayersInKnockout(event.target.value) }}>
-                            <option value={null}></option>
+                            <option value=""></option>
                             {getOptions()}
                         </select>
                     </div>

@@ -13,7 +13,7 @@ function SelectGroupSize({ players, setGroupSize }) {
         ));
         return options.length
             ? options
-            : <option value={null}>Unable to pick group size with {players.length} players</option>;
+            : <option value="">Unable to pick group size with {players.length} players</option>;
     }
 
     return (
@@ -23,7 +23,7 @@ function SelectGroupSize({ players, setGroupSize }) {
                     <label htmlFor="groupSize" className="col-sm-3 col-form-label">Group size</label>
                     <div className="col-sm-9">
                         <select id="groupSize" className="form-control" onChange={(event) => { setGroupSize(event.target.value) }}>
-                            <option value={null}></option>
+                            <option value=""></option>
                             {getOptions()}
                         </select>
                     </div>
