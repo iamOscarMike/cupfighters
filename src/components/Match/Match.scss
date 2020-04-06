@@ -27,6 +27,7 @@ $group-4: #139C9A;
         input[type=number] {
             display: inline;
             width: 3rem;
+            -moz-appearance: textfield;
 
             &::-webkit-inner-spin-button {
                 -webkit-appearance: none;
