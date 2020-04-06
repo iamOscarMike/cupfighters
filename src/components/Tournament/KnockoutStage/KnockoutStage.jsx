@@ -44,7 +44,7 @@ const getRounds = (rounds, matches, readOnly) => {
                         ))}
                     </div>
                     <div className="col-sm-12">
-                        {!readOnly && (<button
+                        {currentRound && (<button
                             type="button"
                             className="btn btn-outline-primary btn-lg d-block m-auto"
                             disabled={!roundComplete(round, matches)}
