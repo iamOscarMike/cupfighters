@@ -62,7 +62,7 @@ function Match({
                             <label htmlFor={`${matchId}-player1`}>{player1}</label>
                         </div>
 
-                        {hasPenalties &&
+                        {hasPenalties && (!readOnly || (readOnly && match.throughOnPenalties)) &&
                             <button
                                 className={'button-penalty' + getPenaltyClass(match.player1)}
                                 onClick={() => { changeThroughOnPenalty(match.player1) }}
@@ -95,7 +95,7 @@ function Match({
                             disabled={readOnly}
                         />
 
-                        {hasPenalties &&
+                        {hasPenalties && (!readOnly || (readOnly && match.throughOnPenalties)) &&
                             <button
                                 className={'button-penalty' + getPenaltyClass(match.player2)}
                                 onClick={() => { changeThroughOnPenalty(match.player2) }}
